@@ -79,3 +79,8 @@ modifier le pom pour avoir les bonnes versions de jUnit et java.
 
 Dans le pom ajouter la dépendance jersey
 
+
+# Pour config git
+export http_proxy=http://cache.univ-lille1.fr:3128
+export https_proxy=http://cache.univ-lille1.fr:3128
+
