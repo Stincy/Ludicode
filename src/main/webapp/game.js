@@ -72,6 +72,14 @@ function Player(game, x, y) {
 		this.moveTo(x * this.game.map.tile_size, y * this.game.map.tile_size);
 	}
 
+	this.tileX = function tileX() {
+		return Math.round(this.x/this.game.map.tile_size);
+	}
+
+	this.tileY = function tileY() {
+		return Math.round(this.y/this.game.map.tile_size);
+	}
+
 	
 }
 
@@ -113,6 +121,13 @@ function mainLoop() {
 
 	time = now;
 	game.update(dt);
+}
+
+function droite() game.player.moveToTile(game.player.tileX()+1, game.player.tileY());
+function gauche() game.player.moveToTile(game.player.tileX()-1, game.player.tileY());
+
+function executeAlgo() {
+	eval($("#algo").val());
 }
 
 mainLoop();
