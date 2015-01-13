@@ -1,5 +1,5 @@
 var speed = 10;
-
+var actions = [];
 
 function Map(game, tiles, width, height) {
 	this.game = game;
@@ -34,6 +34,7 @@ function Player(game, x, y) {
 
 	var goToX = x;
 	var goToY = y;
+	var moving = false;
 
 	this.render = function render(context) {
 		context.beginPath();
@@ -50,20 +51,23 @@ function Player(game, x, y) {
 			this.x += 10 * delta * speed * xsign;
 		} else {
 			this.x = goToX;
+			if (Math.abs(goToY - this.y) > 2) {
+				var ysign = 1;
+				if (goToY - this.y < 0) ysign = -1;
+
+				this.y += 10 * delta * speed * ysign;
+			} else {
+				this.y = goToY;
+				moving = false;
+			}
 		}
 		
-		if (Math.abs(goToY - this.y) > 2) {
-			var ysign = 1;
-			if (goToY - this.y < 0) ysign = -1;
-
-			this.y += 10 * delta * speed * ysign;
-		} else {
-			this.y = goToY;
-		}
+		
 	
 	}
 
 	this.moveTo = function moveTo(x, y) {
+		moving = true;
 		goToX = x;
 		goToY = y;
 	}
@@ -78,6 +82,10 @@ function Player(game, x, y) {
 
 	this.tileY = function tileY() {
 		return Math.round(this.y/this.game.map.tile_size);
+	}
+
+	this.isDoingSomething = function isDoingSomething() {
+		return moving;
 	}
 
 	
@@ -105,6 +113,11 @@ function Game(width, height) {
 	}
 
 	this.update = function update(delta) {
+		if (actions.length > 0 && !this.player.isDoingSomething()) {
+			//alert("new action");
+			var arr = actions.shift();
+			this.player.moveToTile(this.player.tileX() + arr[0], this.player.tileY() + arr[1]);
+		}
 		this.map.update(delta);
 		this.player.update(delta);
 		this.render();
@@ -123,8 +136,15 @@ function mainLoop() {
 	game.update(dt);
 }
 
-function droite() game.player.moveToTile(game.player.tileX()+1, game.player.tileY());
-function gauche() game.player.moveToTile(game.player.tileX()-1, game.player.tileY());
+//game.player.moveToTile(game.player.tileX()+1, game.player.tileY());
+
+function droite() {actions.push([1, 0])}
+function gauche() {actions.push([-1, 0])}
+function bas() {actions.push([0, 1])}
+function haut() {actions.push([0, -1])}
+//function gauche() {game.player.moveToTile(game.player.tileX()-1, game.player.tileY());}
+//function bas() {game.player.moveToTile(game.player.tileX(), game.player.tileY()+1);}
+//function haut() {game.player.moveToTile(game.player.tileX()-1, game.player.tileY()-1);}
 
 function executeAlgo() {
 	eval($("#algo").val());
