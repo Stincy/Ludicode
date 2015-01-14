@@ -22,6 +22,8 @@ public class Probleme {
 	                   " Enonce                  TEXT NOT NULL," +
 	                   " Score                   INT  NOT NULL," +
 	                   " NumHisto                INT  NOT NULL," +
+	                   " Pseudo                  TEXT NOT NULL," +
+	                   " CONSTRAINT Pseudo_fk FOREIGN KEY(Pseudo) REFERENCES Utilisateur," +
 	                   " CONSTRAINT NumHisto_fk FOREIGN KEY(NumHisto) REFERENCES Historique," +
 	                   " CONSTRAINT Score_fk FOREIGN KEY(Score) REFERENCES Utilisateur)";
 	      stmt.executeUpdate(sql);
