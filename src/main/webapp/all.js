@@ -23,7 +23,7 @@ function postUser(name) {
 			afficheUser(data);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			alert('postUser error: ' + textStatus);
+			alert('postUser error: ' + textStatus + " " + errorThrown);
 		}
 	});
 }
