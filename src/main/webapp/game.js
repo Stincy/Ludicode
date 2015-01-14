@@ -73,7 +73,11 @@ function Player(game, x, y) {
 	}
 
 	this.moveToTile = function moveToTile(x, y) {
-		this.moveTo(x * this.game.map.tile_size, y * this.game.map.tile_size);
+		if (this.game.map.tiles[y][x] != 1) {
+			this.moveTo(x * this.game.map.tile_size, y * this.game.map.tile_size);
+			return true;
+		}
+		return false;
 	}
 
 	this.tileX = function tileX() {
@@ -95,10 +99,11 @@ function Player(game, x, y) {
 function Game(width, height) {
 	this.width = width;
 	this.height = height;
-	this.tiles = [[0,0,0,0],
-	     	      [1,0,0,0],
-                      [0,0,0,0],
-                      [0,0,0,0]];
+	this.tiles = [[2,0,0,0,0],
+	     	      [1,1,1,0,0],
+                      [1,0,0,0,0],
+                      [1,0,1,1,1],
+		      [1,0,1,1,1]];
 
 
 	this.map = new Map(this, this.tiles, this.width, this.height);
@@ -114,9 +119,13 @@ function Game(width, height) {
 
 	this.update = function update(delta) {
 		if (actions.length > 0 && !this.player.isDoingSomething()) {
-			//alert("new action");
 			var arr = actions.shift();
-			this.player.moveToTile(this.player.tileX() + arr[0], this.player.tileY() + arr[1]);
+			if (!this.player.moveToTile(this.player.tileX() + arr[0], this.player.tileY() + arr[1])) {
+				alert("Collision avec un mur !")
+				reset();
+			} else {
+				addToLog(arr[2]);
+			}
 		}
 		this.map.update(delta);
 		this.player.update(delta);
@@ -136,17 +145,46 @@ function mainLoop() {
 	game.update(dt);
 }
 
+function addToLog(msg) {
+	
+	$('#log').scrollTop($('#log')[0].scrollHeight);
+	document.getElementById("log").value += msg + "\n";
+}
+
+function reset() {
+	actions = [];
+	// Cherche la position initiale du joueur
+	/*
+	var initx = 0;
+	var inity = 0;
+	
+	for (var xx = 0; xx < tiles.length; ++xx) {
+		for (var yy = 0; yy < tiles[0].length; ++yy) {
+			if (tiles[yy][xx] == 2) {
+				initx = xx;
+				inity = yy;
+				break;
+			}
+		}
+	}
+
+	game.player.moveToTile(initx, inity);*/
+	
+}
+
 //game.player.moveToTile(game.player.tileX()+1, game.player.tileY());
 
-function droite() {actions.push([1, 0])}
-function gauche() {actions.push([-1, 0])}
-function bas() {actions.push([0, 1])}
-function haut() {actions.push([0, -1])}
+function droite() {actions.push([1, 0, "Déplace vers la droite"])}
+function gauche() {actions.push([-1, 0, "Déplace vers la gauche"])}
+function bas() {actions.push([0, 1, "Déplace vers le bas"])}
+function haut() {actions.push([0, -1, "Déplace vers le haut"])}
 //function gauche() {game.player.moveToTile(game.player.tileX()-1, game.player.tileY());}
 //function bas() {game.player.moveToTile(game.player.tileX(), game.player.tileY()+1);}
 //function haut() {game.player.moveToTile(game.player.tileX()-1, game.player.tileY()-1);}
 
 function executeAlgo() {
+	document.getElementById("log").value = "";
+	actions = [];
 	eval($("#algo").val());
 }
 
