@@ -29,7 +29,7 @@
 	<span class="icon-bar"></span>
 	<span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Lunicode</a>
+      <a class="navbar-brand" href="Accueil.html">Lunicode</a>
     </div>
     
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -59,13 +59,11 @@
     
     <ul class="nav navbar-nav navbar-right">
 	<li class="dropdown">
-	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Gestion votre compte<span class="caret"></span></a>
+	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
 	  <ul class="dropdown-menu" role="menu">
-	    <li><a href="#">Action</a></li>
-	    <li><a href="#">Another action</a></li>
-	    <li><a href="#">Something else here</a></li>
+	    <li><a href="#">Gerer votre profil</a></li>
 	    <li class="divider"></li>
-	    <li><a href="#">Separated link</a></li>
+	    <li><a href="#">Deconnexion</a></li>
 	  </ul>
 	</li>
 	<li><p class="navbar-text">Signed in as Mark Otto</p></li>
@@ -79,11 +77,15 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-md-3">
+				
 					<canvas id="enigme" width="200" height="200"
 					style="border:1px solid #c3c3c3;">
 					Votre navigateur ne supporte pas le HTML5 :(
 					</canvas>
-					<button onclick="executeAlgo()">Executer</button>
+					
+					<button onclick="executeAlgo()" class="btn btn-success btn-lg" ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Executer</button>
+					<h4> Déplacez le rond rouge à l'aide des différentes instruction jusqu'à sa destination.</h4>
+					
 				</div>	
 				<div class="col-md-5">
 					<canvas id="commands" width="320" height="480">
@@ -92,8 +94,11 @@
 				</div>
 
 				<div class="col-md-3">
-					<ul id="commandsBtns">
-					</ul>
+				<ul>
+					<li style = "list-style: none ; margin-bottom: 10px" ><button class="btn btn-primary" ></span> commande</button></li>
+				</ul>	
+					<div id="commandsBtns" >
+					</div>
 				</div>
 			</div>
 		</div>
