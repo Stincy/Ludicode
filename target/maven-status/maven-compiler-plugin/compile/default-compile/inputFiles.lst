@@ -1,47 +1,3 @@
-<<<<<<< HEAD
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/App.java
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/LevelResource.java
-/tmp/massond/Ludicode/src/main/java/BDD/Leaderboard.java
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/ProblemsData.java
-/tmp/massond/Ludicode/src/main/java/BDD/Level.java
-/tmp/massond/Ludicode/src/main/java/BDD/Utilisateur.java
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/LevelDao.java
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/HistoricData.java
-/tmp/massond/Ludicode/src/main/java/BDD/SupprimerTable.java
-/tmp/massond/Ludicode/src/main/java/BDD/Database.java
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/User.java
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/Play.java
-/tmp/massond/Ludicode/src/main/java/BDD/Probleme.java
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/InscriptionResource.java
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/UserResource.java
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/UserDao.java
-/tmp/massond/Ludicode/src/main/java/BDD/Historique.java
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/UserDBRessource.java
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/UserDBResource.java
-/tmp/massond/Ludicode/src/main/java/fr/iutinfo/UserData.java
-=======
-<<<<<<< HEAD
-/tmp/lameirey/Ludicode/src/main/java/BDD/Leaderboard.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/UserResource.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/App.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/InscriptionResource.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/ProblemsData.java
-/tmp/lameirey/Ludicode/src/main/java/BDD/Historique.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/UserData.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/UserDBResource.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/Play.java
-/tmp/lameirey/Ludicode/src/main/java/BDD/Level.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/UserDBRessource.java
-/tmp/lameirey/Ludicode/src/main/java/BDD/Probleme.java
-/tmp/lameirey/Ludicode/src/main/java/BDD/SupprimerTable.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/LevelDao.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/HistoricData.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/LevelResource.java
-/tmp/lameirey/Ludicode/src/main/java/BDD/Database.java
-/tmp/lameirey/Ludicode/src/main/java/BDD/Utilisateur.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/User.java
-/tmp/lameirey/Ludicode/src/main/java/fr/iutinfo/UserDao.java
-=======
 /tmp/Ludicode/src/main/java/fr/iutinfo/LevelResource.java
 /tmp/Ludicode/src/main/java/BDD/SupprimerTable.java
 /tmp/Ludicode/src/main/java/fr/iutinfo/UserResource.java
@@ -62,5 +18,3 @@
 /tmp/Ludicode/src/main/java/fr/iutinfo/UserDao.java
 /tmp/Ludicode/src/main/java/fr/iutinfo/InscriptionResource.java
 /tmp/Ludicode/src/main/java/BDD/Database.java
->>>>>>> b7561daebf2b8bc1b004002ae95f209a4a3de06e
->>>>>>> 5c5be9312254f4501c6571e3079a251c36d6ac87
