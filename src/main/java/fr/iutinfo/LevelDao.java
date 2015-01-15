@@ -10,12 +10,12 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import BDD.Level;
 
 public interface LevelDao {
-	@SqlUpdate("create table levels (id integer primary key autoincrement, difficulty integer, information TEXT, tiles TEXT)")
+	@SqlUpdate("create table levels (id integer primary key autoincrement, nbCommands integer, difficulty integer, information TEXT, tiles TEXT)")
 	void createLevelTable();
 
-	@SqlUpdate("insert into levels (difficulty, information, tiles) values (:difficulty, :information, :tiles)")
+	@SqlUpdate("insert into levels (difficulty, nbCommands, information, tiles) values (:difficulty, :nbCommands, :information, :tiles)")
 	@GetGeneratedKeys
-	int insert(@Bind("difficulty") int difficulty, @Bind("information") String info, @Bind("tiles") String tiles);
+	int insert(@Bind("difficulty") int difficulty, @Bind("nbCommands") int nbCommands, @Bind("information") String info, @Bind("tiles") String tiles);
 
 	@SqlQuery("select * from levels where difficulty = :difficulty")
     @RegisterMapperFactory(BeanMapperFactory.class)

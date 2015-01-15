@@ -6,6 +6,7 @@ public class Level {
 	private int difficulty;
 	private String info;
 	private String tiles;
+	private int nbCommands;
 	
 	
 	
@@ -32,6 +33,12 @@ public class Level {
 	}
 	public void setTiles(String tiles) {
 		this.tiles = tiles;
+	}
+	public int getNbCommands() {
+		return nbCommands;
+	}
+	public void setNbCommands(int nbCommands) {
+		this.nbCommands = nbCommands;
 	}
 
 }
