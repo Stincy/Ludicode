@@ -42,25 +42,15 @@ function connexion() {
 	var mdp = $('#mdp').val();
 	
 	createCookie("pseudo",pseudo,7);
-	window.location.href = "Accueil.html";
-// $.ajax({
-// type : 'GET'
-// contentType : 'application/json',
-// url : "v1/user/",
-// dataType : "json",
-// data : JSON.stringify({
-// "pseudo" : pseudo,
-// "mdp" : mdp,
-// }),
-// success : function(data, textStatus, jqXHR) {
-// $("#message").html("Connexion reussie !");
-// window.location.href = "Accueil.html";
-// },
-// error : function(jqXHR, textStatus, errorThrown) {
-// $("#message").html("Connexion echouée !");
-// alert('postUser error: ' + textStatus + " " + errorThrown);
-// }
-// });
+	 
+	 $.getJSON("v1/userdb/"+pseudo+"/"+mdp, function(data) {
+		 if (data == null) return;
+		 alert(data);
+		 createCookie("pseudo",pseudo,7);
+		 window.location.href = "Accueil.html";
+		}).error(function() {
+		    alert("error");
+		});
 }
 
 function createCookie(name,value,days) {
