@@ -47,6 +47,10 @@ public interface UserDao {
 	@SqlUpdate("insert into Leaderboard (Score, Pseudo) values (:Score, :Pseudo)")
 	int insertLeaderboard(@Bind("Score, Pseudo") int Score, String Pseudo);
 	
+	@SqlUpdate("select * from Utilisateur where Pseudo = :Pseudo and Mdp = :Mdp")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	UserData verifUser(@Bind("Pseudo") String Pseudo, @Bind("Mdp") String Mdp);
+	
 	@SqlQuery("select sum(Score) from Probleme as p, Utilisateur as a where p.Pseudo = a.Pseudo;")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	int ScoreTotal(@Bind("Score") int Score);

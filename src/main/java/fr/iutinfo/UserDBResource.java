@@ -21,30 +21,23 @@ public class UserDBResource {
 		} catch (Exception e) {
 			System.out.println("Table Utilisateur déjà là !");
 		}
-		try {
-			dao.createHistoriqueTable();
-		} catch (Exception e) {
-			System.out.println("Table Historique déjà là !");
-		}
-		try {
-			dao.createLeaderboardTable();
-		} catch (Exception e) {
-			System.out.println("Table Leaderboard déjà là !");
-		}
-		try {
-			//dao.createProblemeTable();
-		} catch (Exception e) {
-			System.out.println("Table Probleme déjà là !");
-		}
-		//dao.insert("foo");
+		//dao.insertUserData("foo");
 	}
 	
 	@POST
 	public UserData createUtilisateur(UserData user){
 		int id = dao.insertUserData(user.getPseudo(), user.getNom(), user.getPrenom(), user.getMdp(), user.getTypeUser());
-		//user.setID(id);
+		user.setId(id);
 		return user;
 	}
 	
-	
+	@GET
+	@Path("/{Pseudo}/{Mdp}")
+	public boolean verifUserData(@PathParam("Pseudo") String Pseudo, @PathParam("Mdp") String Mdp){
+		UserData user = dao.verifUser(Pseudo, Mdp);
+		if (user == null){
+			return false;
+		}
+		return true;
+	}
 }
