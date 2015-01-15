@@ -15,6 +15,9 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="web.js"></script>
   </head>
   <body>
     <div class="container">
@@ -39,7 +42,7 @@
 	<li class="dropdown">
 	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Niveaux <span class="caret"></span></a>
 	  <ul class="dropdown-menu" role="menu">
-	    <li><a href="niveau.html">Niveau 1</a></li>
+	    <li><a href="niveau.html?level=1">Niveau 1</a></li>
 	    
 	  </ul>
 	</li>
@@ -58,10 +61,10 @@
 	  <ul class="dropdown-menu" role="menu">
 	    <li><a href="#">Gerer votre profil</a></li>
 	    <li class="divider"></li>
-	    <li><a href="#">Deconnexion</a></li>
+	    <li><a href="index.html">Deconnexion</a></li>
 	  </ul>
 	</li>
-	<li><p class="navbar-text">Signed in as Mark Otto</p></li>
+ 	<li><p id="session" class="navbar-text"></p></li>
       </ul>
     </nav>
     </div>
@@ -117,6 +120,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script>$(document).ready(afficherSession());</script>
 	
     
     
