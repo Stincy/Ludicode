@@ -33,7 +33,9 @@ public class LevelResource {
 		} catch (Exception e) {
 			System.out.println("Table déjà là !");
 		}
-		dao.insert("Test level", 1, "Rejoindre le carré jaune en deplacant le rond rouge", "dsfds");
+		dao.insert(1, "Déplacer le rond rouge jusqu'au carré jaune", "0,0,0,0|2,3,0,0|0,0,0,0|0,0,0,0");
+		dao.insert(2, "Déplacer le rond rouge jusqu'au carré jaune", "0,0,0,0|2,0,0,3|0,0,0,0|0,0,0,0");
+		dao.insert(3, "Déplacer le rond rouge jusqu'au carré jaune", "0,0,0,0|0,2,0,0|0,0,3,0|0,0,0,0");
 	}
 	
 	@GET
