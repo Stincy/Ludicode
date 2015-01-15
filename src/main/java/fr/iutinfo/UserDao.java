@@ -27,19 +27,6 @@ public interface UserDao {
             " PRIMARY KEY (Pseudo, Score));")
 	void createLeaderboardTable();
 	
-	@SqlUpdate("CREATE TABLE Probleme " +
-	                   "(NumProbleme INT PRIMARY KEY  NOT NULL," +
-	                   " TypePb                  TEXT NOT NULL," + 
-	                   " NiveauDiff              INT  NOT NULL," +
-	                   " TaillePb                TEXT NOT NULL," +
-	                   " Enonce                  TEXT NOT NULL," +
-	                   " Score                   INT  NOT NULL," +
-	                   " NumHisto                INT  NOT NULL," +
-	                   " Pseudo                  TEXT NOT NULL," +
-	                   " CONSTRAINT Pseudo_fk FOREIGN KEY(Pseudo) REFERENCES Utilisateur," +
-	                   " CONSTRAINT NumHisto_fk FOREIGN KEY(NumHisto) REFERENCES Historique," +
-	                   " CONSTRAINT Score_fk FOREIGN KEY(Score) REFERENCES Utilisateur)")
-	void createProblemeTable();
 	
 	@SqlUpdate("CREATE TABLE Utilisateur " +
 	                   "(NumUt    INT PRIMARY KEY" +
@@ -56,13 +43,6 @@ public interface UserDao {
 	@GetGeneratedKeys
 	int insertUserData(@Bind("Pseudo, Nom, Prenom, Mdp, TypeUser") String Pseudo, String Nom, String Prenom, String Mdp, String TypeUser);
 	
-	@SqlUpdate("insert into Probleme (TypePb, NiveauDiff, TaillePb, Enonce, Score, NumHisto, Pseudo) values (:TypePb, :NiveauDiff, :TaillePb, :Enonce, :Score, :NumHisto, :Pseudo)")
-	@GetGeneratedKeys
-	int insertPb(@Bind("TypePb, NiveauDiff, TaillePb, Enonce, Score, NumHisto, Pseudo") String TypePb, String NiveauDiff, String TaillePb, String Enonce, int Score, int NumHisto, String Pseudo);
-	
-	@SqlUpdate("insert into Historique (Score, TypeHisto, Pseudo, NumProbleme) values (:Score, :TypeHisto, :Pseudo, :NumProbleme)")
-	@GetGeneratedKeys
-	int insertHisto(@Bind("Score, TypeHisto, Pseudo, NumProbleme") int Score, String TypeHisto, String Pseudo, int NumProbleme);
 	
 	@SqlUpdate("insert into Leaderboard (Score, Pseudo) values (:Score, :Pseudo)")
 	int insertLeaderboard(@Bind("Score, Pseudo") int Score, String Pseudo);
