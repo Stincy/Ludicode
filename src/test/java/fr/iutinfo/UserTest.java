@@ -48,11 +48,11 @@ public class UserTest extends JerseyTest {
 
 	@Test
 	public void testUpdateUserName() {
-		/*UserData u = createUser(6, "Lameire", "Yoann", "Stincy", "0000", "eleve");
+		UserData u = createUser(6, "Lameire", "Yoann", "Stincy", "0000", "eleve");
 		u.setNom("yann");
 		Response rep = target("/user").path(""+u.getId()).request()
 				.put(Entity.entity(u,MediaType.APPLICATION_JSON));;
-		UserData updatedUser = rep.readEntity(UserData.class);*/
+		UserData updatedUser = rep.readEntity(UserData.class);
 		//assertEquals("yann", updatedUser.getNom());
 	}
 	

@@ -28,6 +28,7 @@ public class UserResource {
 	@POST
 	public UserData createUser(UserData user) {
 		int id = users.size();
+		user.setId(id+1);
 		users.put(id+1, user);
 		return user;
 	}
