@@ -9,6 +9,49 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
 public interface UserDao {
 
+	@SqlUpdate("CREATE TABLE Historique " +
+	                   "(NumHisto    INT PRIMARY KEY NOT NULL," +
+	                   " Score       INT NOT NULL," +
+	                   " TypeHisto   TEXT NOT NULL," +
+	                   " Pseudo      TEXT NOT NULL," +
+	                   " NumProbleme INT NOT NULL," +
+	                   " CONSTRAINT NumProbleme_fk FOREIGN KEY(NumProbleme) REFERENCES Probleme," +
+	                   " CONSTRAINT Pseudo_fk FOREIGN KEY(Pseudo) REFERENCES Utilisateur);")
+	void createHistoriqueTable();
+	
+	@SqlUpdate("CREATE TABLE Leaderboard " +
+            "(Pseudo TEXT," +
+            " Score  INT," + 
+            " CONSTRAINT Pseudo_fk FOREIGN KEY(Pseudo) REFERENCES Utilisateur," +
+            " CONSTRAINT Score_fk  FOREIGN KEY(Score) REFERENCES Historique," +
+            " PRIMARY KEY (Pseudo, Score));")
+	void createLeaderboardTable();
+	
+	@SqlUpdate("CREATE TABLE Probleme " +
+	                   "(NumProbleme INT PRIMARY KEY  NOT NULL," +
+	                   " TypePb                  TEXT NOT NULL," + 
+	                   " NiveauDiff              INT  NOT NULL," +
+	                   " TaillePb                TEXT NOT NULL," +
+	                   " Enonce                  TEXT NOT NULL," +
+	                   " Score                   INT  NOT NULL," +
+	                   " NumHisto                INT  NOT NULL," +
+	                   " Pseudo                  TEXT NOT NULL," +
+	                   " CONSTRAINT Pseudo_fk FOREIGN KEY(Pseudo) REFERENCES Utilisateur," +
+	                   " CONSTRAINT NumHisto_fk FOREIGN KEY(NumHisto) REFERENCES Historique," +
+	                   " CONSTRAINT Score_fk FOREIGN KEY(Score) REFERENCES Utilisateur)")
+	void createProblemeTable();
+	
+	@SqlUpdate("CREATE TABLE Utilisateur " +
+	                   "(NumUt    INT PRIMARY KEY" +
+	                   " Pseudo1              TEXT    NOT NULL," +
+	                   " Nom                  TEXT    NOT NULL," + 
+	                   " Prenom               INT     NOT NULL," +
+	                   " Mdp                  TEXT    NOT NULL," +
+	                   " TypeUser             TEXT    NOT NULL," +
+	                   " Pseudo2              TEXT    NOT NULL," +
+	                   " CONSTRAINT Pseudo2_fk FOREIGN KEY(Pseudo2) REFERENCES Probleme)")
+	void createUtilisateurTable();
+	
 	@SqlUpdate("insert into Utilisateur (Pseudo, Nom, Prenom, Mdp, TypeUser) values (:Pseudo, :Nom, :Prenom, :Mdp, :TypeUser)")
 	@GetGeneratedKeys
 	int insert(@Bind("Pseudo, Nom, Prenom, Mdp, TypeUser") String Pseudo, String Nom, String Prenom, String Mdp, String TypeUser);

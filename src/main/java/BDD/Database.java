@@ -50,7 +50,7 @@ public class Database {
 	}
 
 
-	public static void initDb() throws Exception {
+	/*public static void initDb() throws Exception {
 		Connection c = getConnection();
 	    Statement stmt = null;
 	    try {
@@ -107,5 +107,5 @@ public class Database {
 	    } catch ( Exception e ) {
 	      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	    }
-	}
+	}*/
 }
