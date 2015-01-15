@@ -54,18 +54,18 @@ public interface UserDao {
 	
 	@SqlUpdate("insert into Utilisateur (Pseudo, Nom, Prenom, Mdp, TypeUser) values (:Pseudo, :Nom, :Prenom, :Mdp, :TypeUser)")
 	@GetGeneratedKeys
-	int insert(@Bind("Pseudo, Nom, Prenom, Mdp, TypeUser") String Pseudo, String Nom, String Prenom, String Mdp, String TypeUser);
+	int insertUserData(@Bind("Pseudo, Nom, Prenom, Mdp, TypeUser") String Pseudo, String Nom, String Prenom, String Mdp, String TypeUser);
 	
 	@SqlUpdate("insert into Probleme (TypePb, NiveauDiff, TaillePb, Enonce, Score, NumHisto, Pseudo) values (:TypePb, :NiveauDiff, :TaillePb, :Enonce, :Score, :NumHisto, :Pseudo)")
 	@GetGeneratedKeys
-	int insert(@Bind("TypePb, NiveauDiff, TaillePb, Enonce, Score, NumHisto, Pseudo") String TypePb, String NiveauDiff, String TaillePb, String Enonce, int Score, int NumHisto, String Pseudo);
+	int insertPb(@Bind("TypePb, NiveauDiff, TaillePb, Enonce, Score, NumHisto, Pseudo") String TypePb, String NiveauDiff, String TaillePb, String Enonce, int Score, int NumHisto, String Pseudo);
 	
 	@SqlUpdate("insert into Historique (Score, TypeHisto, Pseudo, NumProbleme) values (:Score, :TypeHisto, :Pseudo, :NumProbleme)")
 	@GetGeneratedKeys
-	int insert(@Bind("Score, TypeHisto, Pseudo, NumProbleme") int Score, String TypeHisto, String Pseudo, int NumProbleme);
+	int insertHisto(@Bind("Score, TypeHisto, Pseudo, NumProbleme") int Score, String TypeHisto, String Pseudo, int NumProbleme);
 	
 	@SqlUpdate("insert into Leaderboard (Score, Pseudo) values (:Score, :Pseudo)")
-	int insert(@Bind("Score, Pseudo") int Score, String Pseudo);
+	int insertLeaderboard(@Bind("Score, Pseudo") int Score, String Pseudo);
 	
 	@SqlQuery("select sum(Score) from Probleme as p, Utilisateur as a where p.Pseudo = a.Pseudo;")
 	@RegisterMapperFactory(BeanMapperFactory.class)
