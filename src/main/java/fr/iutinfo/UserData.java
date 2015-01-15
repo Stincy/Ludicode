@@ -1,6 +1,7 @@
 package fr.iutinfo;
 
 public class UserData {
+	private int id = 0;
 	private String nom;
 	private String prenom;
 	private String pseudo;
@@ -9,7 +10,8 @@ public class UserData {
 	private User superviseur;/* user professeur supervisant eleve ou null pour un professeur */
 	
 
-	public UserData(String nom,String prenom, String pseudo, String mdp, String typeUser, User superviseur) {
+	public UserData(int id,String nom,String prenom, String pseudo, String mdp, String typeUser, User superviseur) {
+		this.id=id;
 		this.nom = nom;
 		this.prenom=prenom;
 		this.pseudo=pseudo;
@@ -18,7 +20,8 @@ public class UserData {
 		this.superviseur=superviseur;		
 	}
 	
-	public UserData(String nom,String prenom, String pseudo, String mdp, String typeUser) {
+	public UserData(int id, String nom,String prenom, String pseudo, String mdp, String typeUser) {
+		this.id=id;
 		this.nom = nom;
 		this.prenom=prenom;
 		this.pseudo=pseudo;
@@ -26,6 +29,17 @@ public class UserData {
 		this.typeUser=typeUser;
 	}
 
+	public UserData() {
+		
+	}
+
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id=id;
+	}
 	
 	public String getNom() {
 		return nom;
@@ -77,7 +91,7 @@ public class UserData {
 		}else
 			this.superviseur=null;
 	}
-
+	
 	public boolean equals(Object u) {
 		return pseudo.equals(((UserData) u).pseudo);
 	}
@@ -88,5 +102,7 @@ public class UserData {
 		else
 			return nom+ " " +prenom+ " alias "+pseudo+" mot de passe "+mdp+" est un "+typeUser+", supervise par "+superviseur;
 	}
+
+	
 
 }

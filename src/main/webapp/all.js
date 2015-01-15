@@ -16,13 +16,18 @@ function postUser(name) {
 		url : "v1/user/",
 		dataType : "json",
 		data : JSON.stringify({
-			"name" : name,
+			"nom" : nom,
+			"prenom" : prenom,
+			"pseudo" : pseudo,
+			"mdp" : mdp,
 			"id" : 0
 		}),
 		success : function(data, textStatus, jqXHR) {
-			afficheUser(data);
+			$("#message").html("Inscription reussi !");
+			window.location.replace("http://stackoverflow.com");
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
+			$("#message").html("Inscription echoué !");
 			alert('postUser error: ' + textStatus + " " + errorThrown);
 		}
 	});

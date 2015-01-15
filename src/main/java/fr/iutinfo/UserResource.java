@@ -23,13 +23,12 @@ import javax.ws.rs.core.Response.Status;
 @Path("/user")
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
-	private static Map<Integer, User> users = new HashMap<>();
+	private static Map<Integer, UserData> users = new HashMap<>();
 	
 	@POST
-	public User createUser(User user) {
+	public UserData createUser(UserData user) {
 		int id = users.size();
-		user.setId(id+1);
-		users.put(user.getId(), user);
+		users.put(id+1, user);
 		return user;
 	}
 	
@@ -42,16 +41,16 @@ public class UserResource {
 	    return Response.accepted().status(Status.NOT_FOUND).build();
 	}
 	
-	protected User find(String name) {
-		User out = null;
-		for (User user : users.values()) {
-			if (user.getName().equals(name)) {
+	protected UserData find(String name) {
+		UserData out = null;
+		for (UserData user : users.values()) {
+			if (user.getNom().equals(name)) {
 				return user;
 			}
 		}
 		return out;
 	}
-	protected User find(int id) {
+	protected UserData find(int id) {
 		return users.get(id);
 	}
 	
@@ -59,21 +58,21 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
 	public Response updateUser(@PathParam("id") int id, 
-			User user) {
-		User oldUser = find(id);
+			UserData user) {
+		UserData oldUser = find(id);
 		System.out.println("Should update user with id: "+id
 				+" ("+oldUser+") to " +user);
 		if (user == null) {
 			throw new WebApplicationException(404);
 		}
-		oldUser.setName(user.getName());
+		oldUser.setNom(user.getNom());
 		return Response.status(200).entity(oldUser).build();
 	}
 	
 	@GET
 	@Path("/{name}")
-	public User getUser(@PathParam("name") String name ) {
-		User out = find(name);
+	public UserData getUser(@PathParam("name") String name ) {
+		UserData out = find(name);
 		if (out == null) {
 			throw new WebApplicationException(404);
 		} 
@@ -81,8 +80,8 @@ public class UserResource {
 	}
 	
 	@GET
-	public List<User> getUsers(@DefaultValue("10") @QueryParam("limit") int limit) {
-		return new ArrayList<User>(users.values());
+	public List<UserData> getUsers(@DefaultValue("10") @QueryParam("limit") int limit) {
+		return new ArrayList<UserData>(users.values());
 	}
 
 }
