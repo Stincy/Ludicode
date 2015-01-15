@@ -7,7 +7,6 @@ public class UserData {
 	private String pseudo;
 	private String mdp;
 	private String typeUser;/* eleve ou professeur */
-	private User superviseur;/* user professeur supervisant eleve ou null pour un professeur */
 	
 
 	public UserData(int id,String nom,String prenom, String pseudo, String mdp,String typeUser) {
@@ -18,16 +17,6 @@ public class UserData {
 		this.mdp=mdp;
 		this.typeUser=typeUser;
 				
-	}
-	
-	public UserData(int id,String nom,String prenom, String pseudo, String mdp,String typeUser, User superviseur) {
-		this.id=id;
-		this.nom = nom;
-		this.prenom=prenom;
-		this.pseudo=pseudo;
-		this.mdp=mdp;
-		this.typeUser=typeUser;
-		this.superviseur=superviseur;
 	}
 
 	public UserData() {
@@ -74,23 +63,12 @@ public class UserData {
 		this.mdp = mdp;
 	}
 	
-public String getTypeUser() {
+	public String getTypeUser() {
 		return typeUser;
 	}
 
-	public void setPTypeUser(String typeUser) {
+	public void setTypeUser(String typeUser) {
 		this.typeUser = typeUser;
-	}
-	
-	public User getSuperviseur() {
-		return superviseur;
-	}
-
-	public void setSuperviseur(User superviseur) {
-		if(this.typeUser.equals("eleve")){
-			this.superviseur = superviseur;
-		}else
-			this.superviseur=null;
 	}
 	
 	public boolean equals(Object u) {
@@ -98,6 +76,6 @@ public String getTypeUser() {
 	}
 
 	public String toString() {
-		return nom+ " " +prenom+ " alias "+pseudo+" mot de passe "+mdp;
+		return nom+ " " +prenom+ " alias "+pseudo+" mot de passe "+mdp+" est un "+typeUser;
 	}
 }

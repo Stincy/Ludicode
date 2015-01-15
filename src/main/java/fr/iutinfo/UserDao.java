@@ -31,19 +31,25 @@ public interface UserDao {
 	void createPlayTable();
 
 	@SqlUpdate("CREATE TABLE UserData " +
-	                   "(iduser    INT PRIMARY KEY" +
+	                   "(iduser    INT PRIMARY KEY," +
 	                   " pseudo               TEXT    NOT NULL," +
 	                   " nom                  TEXT    NOT NULL," + 
 	                   " prenom               INT     NOT NULL," +
 	                   " mdp                  TEXT    NOT NULL," +
-	                   " typeUser             TEXT"+
-	                   " superviseur          TEXT," +
-	                   " CONSTRAINT pseudo2_fk FOREIGN KEY(pseudo2) REFERENCES levels)")
+	                   " typeUser             TEXT);")
 	void createUserDataTable();
 	
-	@SqlUpdate("insert into UserData (pseudo, nom, prenom, mdp, typeUser, superviseur) values (:iduser, :pseudo, :nom, :prenom, :mdp, :typeUser, :superviseur)")
+	@SqlUpdate("CREATE TABLE Follow " +
+            "(iduser1    INT," +
+            " iduser2    INT," +
+            " CONSTRAINT iduser1_fk FOREIGN KEY(iduser1) references UserData,"+
+            " CONSTRAINT iduser2_fk FOREIGN KEY(iduser2) references UserData,"+
+            " CONSTRAINT iduser_pk PRIMARY KEY(iduser1, iduser2));")
+     void createFollowTable();
+	
+	@SqlUpdate("insert into UserData (pseudo, nom, prenom, mdp, typeUser) values (:iduser, :pseudo, :nom, :prenom, :mdp, :typeUser)")
 	@GetGeneratedKeys
-	int insertUser(@Bind("pseudo") String nom, @Bind("prenom") String prenom, @Bind("mdp") String mdp, @Bind("typeUser") String typeUser, @Bind("superviseur") String superviseur);
+	int insertUser(@Bind("pseudo") String pseudo, @Bind("nom") String nom, @Bind("prenom") String prenom, @Bind("mdp") String mdp, @Bind("typeUser") String typeUser);
 	
 	@SqlUpdate("insert into History (idlvl, score, pseudo) values (:idlvl, :score, :pseudo)")
 	@GetGeneratedKeys
