@@ -4,7 +4,7 @@ package BDD;
 public class Level {
 	private String name;
 	private int difficulty;
-	private String info;
+	private String information;
 	private String tiles;
 	private int nbCommands;
 	
@@ -22,11 +22,11 @@ public class Level {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getInfo() {
-		return info;
+	public String getInformation() {
+		return information;
 	}
-	public void setInfo(String info) {
-		this.info = info;
+	public void setInformation(String info) {
+		this.information = info;
 	}
 	public String getTiles() {
 		return tiles;
