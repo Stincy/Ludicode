@@ -32,18 +32,18 @@ public class UserDBResource {
 			System.out.println("Table Leaderboard déjà là !");
 		}
 		try {
-			dao.createProblemeTable();
+			//dao.createProblemeTable();
 		} catch (Exception e) {
 			System.out.println("Table Probleme déjà là !");
 		}
-		dao.insert("foo");
+		//dao.insert("foo");
 	}
 	
 	@POST
 	public UserData createUtilisateur(UserData user){
 		int id = dao.insertUserData(user.getPseudo(), user.getNom(), user.getPrenom(), user.getMdp(), user.getTypeUser());
-		user.setID(id);
-		return Userdata;
+		//user.setID(id);
+		return user;
 	}
 	
 	
