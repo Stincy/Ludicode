@@ -21,5 +21,12 @@ public interface UserDao {
 	@GetGeneratedKeys
 	int insert(@Bind("Score, TypeHisto, Pseudo, NumProbleme") int Score, String TypeHisto, String Pseudo, int NumProbleme);
 	
-	//@SqlQuery("select sum(Score) from Probleme ")
+	@SqlUpdate("insert into Leaderboard (Score, Pseudo) values (:Score, :Pseudo)")
+	int insert(@Bind("Score, Pseudo") int Score, String Pseudo);
+	
+	@SqlQuery("select sum(Score) from Probleme as p, Utilisateur as a where p.Pseudo = a.Pseudo;")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	int ScoreTotal(@Bind("Score") int Score);
+	
+	void close();
 }
