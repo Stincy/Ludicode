@@ -86,8 +86,29 @@
 	<script type="text/javascript">
 			$(document).ready(function() {
 				$("#submit").click(function() {
-					//postUser($('#nom').val());
-					alert($('#nom').val());
+										
+					$.ajax({
+						type : 'POST',
+						contentType : 'application/json',
+						url : "v1/inscription/",
+						dataType : "json",
+						data : JSON.stringify({
+							"nom" : "LeNom",
+							"prenom" : "LePrenom",
+							"pseudo" : "LePseudo",
+							"mdp" : "LeMdp",
+							"id" : 0
+						}),
+						success : function(data, textStatus, jqXHR) {
+							$("#message").html("Inscription reussi !");
+							window.location.replace("http://stackoverflow.com");
+						},
+						error : function(jqXHR, textStatus, errorThrown) {
+							$("#message").html("Inscription echoué !");
+							alert('postUser error: ' + textStatus + " " + errorThrown);
+						}
+					});
+	
 				});
 			});
   		</script>
