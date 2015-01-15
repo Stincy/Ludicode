@@ -1,6 +1,7 @@
 package fr.iutinfo;
 
 public class HistoricData {
+	private int id;
 	private int numHistoric;
 	private int numProblem;
 	private String nomPartie;
@@ -8,9 +9,21 @@ public class HistoricData {
 	private int score;
 	private String pseudo;
 	
-	public HistoricData(String nomPartie, String typePartie){
+	public HistoricData(int id, String nomPartie, String typePartie){
 		this.nomPartie=nomPartie;
 		this.typePartie=typePartie;
+	}
+	
+	public HistoricData(){
+		
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public int getNumH() {
@@ -67,6 +80,7 @@ public class HistoricData {
 
 	public String toString() {
 		return numHistoric+ "-" +numProblem+ " -> "+nomPartie+" du type "+typePartie+" le joueur "+pseudo+" a fait "+score+" points";
-	}	
+	}
+	
 }
 

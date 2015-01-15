@@ -1,6 +1,7 @@
 package fr.iutinfo;
 
 public class ProblemsData {
+	private int id;
 	private int numProbleme;
 	private int numHistoric;
 	private String enonce;
@@ -23,6 +24,17 @@ public class ProblemsData {
 		this.createur=createur;
 	}
 	
+	public ProblemsData(){
+		
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}		
 	
 	public User getCreateur() {
 		return createur;
@@ -78,5 +90,6 @@ public class ProblemsData {
 
 	public void setTypePb(String typePb) {
 		this.typePb = typePb;
-	}	
+	}
+
 }

@@ -1,14 +1,27 @@
 package fr.iutinfo;
 
 public class Play {
+	private int id;
 	private String pseudo;
 	private int numProblem;
 	private int score;
 	
-	public Play(String pseudo, int numProbleme, int score){
+	public Play(int id, String pseudo, int numProbleme, int score){
 		this.pseudo=pseudo;
 		this.numProblem=numProbleme;
 		this.score=score;
+	}
+	
+	public Play(){
+		
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String getPseudo() {
@@ -37,6 +50,8 @@ public class Play {
 	public String toString(){
 		return pseudo+"(Niveau "+numProblem+") ......"+score;
 	}
+
+	
 
 }
 

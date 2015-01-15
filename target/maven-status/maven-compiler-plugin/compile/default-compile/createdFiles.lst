@@ -1,8 +1,13 @@
-BDD/Historique.class
-BDD/Probleme.class
-BDD/Leaderboard.class
 fr/iutinfo/User.class
+fr/iutinfo/UserData.class
 BDD/SupprimerTable.class
+fr/iutinfo/ProblemsData.class
 BDD/Utilisateur.class
+BDD/Historique.class
+BDD/Database.class
 fr/iutinfo/UserResource.class
+fr/iutinfo/HistoricData.class
+BDD/Probleme.class
 fr/iutinfo/App.class
+BDD/Leaderboard.class
+fr/iutinfo/Play.class
