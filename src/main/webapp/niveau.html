@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <title>Niveau 1</title>
 
     <!-- Bootstrap -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -76,28 +76,38 @@
 	<div class="panel-heading"><h1> Niveau 1</h1></div>
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-md-3">
-				
+				<div class="col-md-4" >
+					<div class="col-md-offset-2">
+					<h3> Plateau </h3>
+					</div>
 					<canvas id="enigme" width="200" height="200"
-					style="border:1px solid #c3c3c3;">
+					style="border:1px solid #c3c3c3;" class="col-md-offset-2">
 					Votre navigateur ne supporte pas le HTML5 :(
 					</canvas>
 					
-					<button onclick="executeAlgo()" class="btn btn-success btn-lg" ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Executer</button>
-					<h4> Déplacez le rond rouge à l'aide des différentes instruction jusqu'à sa destination.</h4>
+					<div class="row">
+						<div class="col-xs-offset-3">
+						<button onclick="executeAlgo()" class="btn btn-success btn-lg" ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Executer</button>
+						</div>
+					</div>
+					
+					<h4 class="col-xs-offset-1"> D&eacute;placez le rond rouge &agrave; l'aide des diff&eacute;rentes instructions jusqu'&agrave; sa destination.</h4>
 					
 				</div>	
-				<div class="col-md-5">
+				<div class="col-md-5 " >
+					<div class="col-md-offset-1">
+					<h3> Instructions </h3>
 					<canvas id="commands" width="320" height="480">
 					Votre navigateur ne supporte pas le HTML5 :(
 					</canvas>
+					</div>
 				</div>
 
-				<div class="col-md-3">
-				<ul>
-					<li style = "list-style: none ; margin-bottom: 10px" ><button class="btn btn-primary" ></span> commande</button></li>
-				</ul>	
-					<div id="commandsBtns" >
+				<div class="col-md-3" >
+					<div class="col-md-offset-1">
+						<h3> Commandes </h3>
+						<div id="commandsBtns" >
+						</div>
 					</div>
 				</div>
 			</div>
