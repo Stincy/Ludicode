@@ -31,12 +31,13 @@ public interface UserDao {
 	void createPlayTable();
 
 	@SqlUpdate("CREATE TABLE UserData " +
-	                   "(iduser    INT PRIMARY KEY," +
+	                   "(iduser    INT AUTOINCREMENT," +
 	                   " pseudo               TEXT    NOT NULL," +
 	                   " nom                  TEXT    NOT NULL," + 
-	                   " prenom               INT     NOT NULL," +
+	                   " prenom               TEXT     NOT NULL," +
 	                   " mdp                  TEXT    NOT NULL," +
-	                   " typeUser             TEXT);")
+	                   " typeUser             TEXT,"+
+					   " CONSTRAINT userData_pk PRIMARY KEY(iduser));")
 	void createUserDataTable();
 	
 	@SqlUpdate("CREATE TABLE Follow " +
@@ -47,7 +48,7 @@ public interface UserDao {
             " CONSTRAINT iduser_pk PRIMARY KEY(iduser1, iduser2));")
      void createFollowTable();
 	
-	@SqlUpdate("insert into UserData (pseudo, nom, prenom, mdp, typeUser) values (:iduser, :pseudo, :nom, :prenom, :mdp, :typeUser)")
+	@SqlUpdate("insert into UserData (pseudo, nom, prenom, mdp, typeUser) values (:pseudo, :nom, :prenom, :mdp, :typeUser)")
 	@GetGeneratedKeys
 	int insertUser(@Bind("pseudo") String pseudo, @Bind("nom") String nom, @Bind("prenom") String prenom, @Bind("mdp") String mdp, @Bind("typeUser") String typeUser);
 	

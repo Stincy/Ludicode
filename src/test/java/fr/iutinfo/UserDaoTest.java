@@ -15,9 +15,10 @@ public class UserDaoTest {
 	    prof.setMdp("mdpprof");
 	    prof.setTypeUser("professeur");
 	    //prof.setSuperviseur(null);
-	    dao.createUserDataTable();
+	    //dao.createUserDataTable();
 	    dao.insertUser(prof.getPseudo(), prof.getNom(), prof.getPrenom(), prof.getMdp(), prof.getTypeUser());
-	       
+	    
+	    
 	    UserData u = new UserData();
 	    u.setId(1);
 	    u.setPrenom("toto");
@@ -25,8 +26,10 @@ public class UserDaoTest {
 	    u.setPseudo("tito");
 	    u.setMdp("mdp");
 	    u.setTypeUser("eleve");
-
-	    dao.createUserDataTable();
+	    
+	    //dao.insertUser(prof.getPseudo(), prof.getNom(), prof.getPrenom(), prof.getMdp(), prof.getTypeUser());
+	    //dao.verifUser("jijo", "mdpprof");
+	    //dao.createUserDataTable();
 
 	    System.out.println("Terminé");
 	   }
