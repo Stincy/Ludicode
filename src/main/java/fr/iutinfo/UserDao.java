@@ -9,50 +9,57 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
 public interface UserDao {
 
-	@SqlUpdate("CREATE TABLE Historique " +
-	                   "(NumHisto    INT PRIMARY KEY AUTOINCREMENT," +
-	                   " Score       INT NOT NULL," +
-	                   " Pseudo      TEXT NOT NULL," +
-	                   " Numlevel    INT NOT NULL," +
-	                   " CONSTRAINT Numlevel_fk FOREIGN KEY(id) REFERENCES levels," +
-	                   " CONSTRAINT NumUt_fk FOREIGN KEY(NumUt) REFERENCES Utilisateur);")
-	void createHistoriqueTable();
-	
-	@SqlUpdate("CREATE TABLE Leaderboard " +
-            "(NumUt  INT," +
-            " Score  INT," + 
-            " CONSTRAINT NumUt_fk FOREIGN KEY(NumUt) REFERENCES Utilisateur," +
-            " CONSTRAINT Score_fk  FOREIGN KEY(Score) REFERENCES Historique," +
-            " PRIMARY KEY (Pseudo, Score));")
-	void createLeaderboardTable();
+
+	@SqlUpdate("CREATE TABLE History " +
+	                   "(idhisto    INT PRIMARY KEY AUTOINCREMENT," +
+	                   " score      INT NOT NULL," +
+	                   " pseudo     TEXT NOT NULL," +
+	                   " idlvl      INT NOT NULL," +
+	                   " CONSTRAINT idlvl_fk FOREIGN KEY(idlvl) REFERENCES levels," +
+	                   " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData);")
+	void createHistoryTable();
 	
 	
-	@SqlUpdate("CREATE TABLE Utilisateur " +
-	                   "(NumUt    INT PRIMARY KEY AUTOINCREMENT" +
-	                   " Pseudo1              TEXT    NOT NULL," +
-	                   " Nom                  TEXT    NOT NULL," + 
-	                   " Prenom               INT     NOT NULL," +
-	                   " Mdp                  TEXT    NOT NULL," +
-	                   " TypeUser             TEXT    NOT NULL," +
-	                   " Pseudo2              TEXT    NOT NULL," +
-	                   " CONSTRAINT Pseudo2_fk FOREIGN KEY(Pseudo2) REFERENCES levels)")
-	void createUtilisateurTable();
+	@SqlUpdate("CREATE TABLE Play " +
+            "(idplay INT AUTOINCREMENT," +
+            " pseudo TEXT," +
+            " idhisto INT,"+
+            " score  INT," + 
+            " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData," +
+            " CONSTRAINT score_fk  FOREIGN KEY(score) REFERENCES History," +
+            " PRIMARY KEY (iduser, score));")
+	void createPlayTable();
+
+	@SqlUpdate("CREATE TABLE UserData " +
+	                   "(iduser    INT PRIMARY KEY" +
+	                   " pseudo               TEXT    NOT NULL," +
+	                   " nom                  TEXT    NOT NULL," + 
+	                   " prenom               INT     NOT NULL," +
+	                   " mdp                  TEXT    NOT NULL," +
+	                   " typeUser             TEXT"+
+	                   " superviseur          TEXT," +
+	                   " CONSTRAINT pseudo2_fk FOREIGN KEY(pseudo2) REFERENCES levels)")
+	void createUserDataTable();
 	
-	@SqlUpdate("insert into Utilisateur (Pseudo, Nom, Prenom, Mdp, TypeUser) values (:Pseudo, :Nom, :Prenom, :Mdp, :TypeUser)")
+	@SqlUpdate("insert into UserData (pseudo, nom, prenom, mdp, typeUser, superviseur) values (:iduser, :pseudo, :nom, :prenom, :mdp, :typeUser, :superviseur)")
 	@GetGeneratedKeys
-	int insertUserData(@Bind("Pseudo, Nom, Prenom, Mdp, TypeUser") String Pseudo, String Nom, String Prenom, String Mdp, String TypeUser);
+	int insertUser(@Bind("pseudo") String nom, @Bind("prenom") String prenom, @Bind("mdp") String mdp, @Bind("typeUser") String typeUser, @Bind("superviseur") String superviseur);
 	
+	@SqlUpdate("insert into History (idlvl, score, pseudo) values (:idlvl, :score, :pseudo)")
+	@GetGeneratedKeys
+	int insertHistory(@Bind("idlvl") int idlvl, @Bind("score") int score, @Bind("pseudo") String pseudo);
 	
-	@SqlUpdate("insert into Leaderboard (Score, Pseudo) values (:Score, :Pseudo)")
-	int insertLeaderboard(@Bind("Score, Pseudo") int Score, String Pseudo);
+	@SqlUpdate("insert into Play (score, idhisto, pseudo) values (:score, :idhisto, :pseudo)")
+	@GetGeneratedKeys
+	int insertPlay(@Bind("score") int score, @Bind("idhisto") int idhisto, @Bind("pseudo") String pseudo);
 	
-	@SqlUpdate("select * from Utilisateur where Pseudo = :Pseudo and Mdp = :Mdp")
+	@SqlUpdate("select * from UserData where pseudo = :pseudo and mdp = :mdp")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	UserData verifUser(@Bind("Pseudo") String Pseudo, @Bind("Mdp") String Mdp);
+	UserData verifUser(@Bind("pseudo") String pseudo, @Bind("mdp") String mdp);
 	
-	@SqlQuery("select sum(Score) from Historique as h, Utilisateur as a where h.NumUt = a.NumUt;")
+	@SqlQuery("select sum(score) from levels as l, UserData as u where l.iduser = u.iduser;")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	int ScoreTotal(@Bind("Score") int Score);
+	int ScoreTotal(@Bind("score") int score);
 	
 	void close();
 }

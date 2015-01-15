@@ -10,23 +10,24 @@ public class UserData {
 	private User superviseur;/* user professeur supervisant eleve ou null pour un professeur */
 	
 
-	public UserData(int id,String nom,String prenom, String pseudo, String mdp, String typeUser, User superviseur) {
+	public UserData(int id,String nom,String prenom, String pseudo, String mdp,String typeUser) {
 		this.id=id;
 		this.nom = nom;
 		this.prenom=prenom;
 		this.pseudo=pseudo;
 		this.mdp=mdp;
 		this.typeUser=typeUser;
-		this.superviseur=superviseur;		
+				
 	}
 	
-	public UserData(int id, String nom,String prenom, String pseudo, String mdp, String typeUser) {
+	public UserData(int id,String nom,String prenom, String pseudo, String mdp,String typeUser, User superviseur) {
 		this.id=id;
 		this.nom = nom;
 		this.prenom=prenom;
 		this.pseudo=pseudo;
 		this.mdp=mdp;
 		this.typeUser=typeUser;
+		this.superviseur=superviseur;
 	}
 
 	public UserData() {
@@ -73,7 +74,7 @@ public class UserData {
 		this.mdp = mdp;
 	}
 	
-	public String getTypeUser() {
+public String getTypeUser() {
 		return typeUser;
 	}
 
@@ -93,16 +94,10 @@ public class UserData {
 	}
 	
 	public boolean equals(Object u) {
-		return pseudo.equals(((UserData) u).pseudo);
+		return id==(((UserData) u).id);
 	}
 
 	public String toString() {
-		if(this.typeUser.equals("professeur"))
-			return nom+ " " +prenom+ " alias "+pseudo+" mot de passe "+mdp+" est un "+typeUser;
-		else
-			return nom+ " " +prenom+ " alias "+pseudo+" mot de passe "+mdp+" est un "+typeUser+", supervise par "+superviseur;
+		return nom+ " " +prenom+ " alias "+pseudo+" mot de passe "+mdp;
 	}
-
-	
-
 }

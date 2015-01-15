@@ -1,29 +1,22 @@
 package fr.iutinfo;
 
 public class HistoricData {
-	private int id;
 	private int numHistoric;
 	private int numProblem;
-	private String nomPartie;
 	private String typePartie;
 	private int score;
 	private String pseudo;
 	
-	public HistoricData(int id, String nomPartie, String typePartie){
-		this.nomPartie=nomPartie;
+	public HistoricData(int numHistoric, int numProblem, String typePartie, int score, String pseudo){
+		this.numHistoric=numHistoric;
+		this.numProblem=numProblem;
 		this.typePartie=typePartie;
+		this.score=score;
+		this.pseudo=pseudo;
 	}
 	
 	public HistoricData(){
 		
-	}
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public int getNumH() {
@@ -40,14 +33,6 @@ public class HistoricData {
 	
 	public void setNumProbleme(int numProbleme) {
 		this.numProblem = numProbleme;
-	}
-	
-	public String getNomPartie() {
-		return nomPartie;
-	}
-	
-	public void setNomPartie(String nomPartie) {
-		this.nomPartie = nomPartie;
 	}
 
 	public String getTypePartie() {
@@ -79,8 +64,7 @@ public class HistoricData {
 	}
 
 	public String toString() {
-		return numHistoric+ "-" +numProblem+ " -> "+nomPartie+" du type "+typePartie+" le joueur "+pseudo+" a fait "+score+" points";
+		return numHistoric+ "-" +numProblem+ " du type "+typePartie+" le joueur "+pseudo+" a fait "+score+" points";
 	}
 	
 }
-

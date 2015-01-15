@@ -10,7 +10,7 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import BDD.Level;
 
 public interface LevelDao {
-	@SqlUpdate("create table levels (id integer primary key autoincrement, difficulty integer, information TEXT, tiles TEXT)")
+	@SqlUpdate("create table levels (idlvl integer primary key autoincrement, difficulty integer, information TEXT, tiles TEXT)")
 	void createLevelTable();
 
 	@SqlUpdate("insert into levels (difficulty, information, tiles) values (:difficulty, :information, :tiles)")

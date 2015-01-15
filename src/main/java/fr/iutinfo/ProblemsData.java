@@ -1,8 +1,7 @@
 package fr.iutinfo;
 
 public class ProblemsData {
-	private int id;
-	private int numProbleme;
+	private int numProblem;
 	private int numHistoric;
 	private String enonce;
 	private int difficulte;
@@ -10,46 +9,26 @@ public class ProblemsData {
 	private String typePb;
 	private User createur;
 	
-	public ProblemsData(String enonce, int difficulte, String typePb){
+	public ProblemsData(int numProblem, int numHistoric, String enonce, int difficulte, int score, String typePb){
+		this.numProblem=numProblem;
+		this.numHistoric=numHistoric;
 		this.enonce=enonce;
 		this.difficulte=difficulte;
+		this.score=score;
 		this.typePb=typePb;
 				
 	}
 	
-	public ProblemsData(String enonce, int difficulte, String typePb, User createur){
-		this.enonce=enonce;
-		this.difficulte=difficulte;
-		this.typePb=typePb;
-		this.createur=createur;
-	}
-	
 	public ProblemsData(){
 		
+	}	
+	
+	public int getNumProblem() {
+		return numProblem;
 	}
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}		
-	
-	public User getCreateur() {
-		return createur;
-	}
-	
-	public void setCreateur(User createur) {
-		this.createur = createur;
-	}
-	
-	public int getNumProbleme() {
-		return numProbleme;
-	}
-	
-	public void setNumProbleme(int numProbleme) {
-		this.numProbleme = numProbleme;
+	public void setNumProblem(int numProblem) {
+		this.numProblem = numProblem;
 	}
 
 	public String getEnonce() {
@@ -90,6 +69,18 @@ public class ProblemsData {
 
 	public void setTypePb(String typePb) {
 		this.typePb = typePb;
+	}
+	
+	public User getCreateur() {
+		return createur;
+	}
+	
+	public void setCreateur(User createur) {
+		this.createur = createur;
+	}
+	
+	public boolean equals(Object p) {
+		return numProblem==(((ProblemsData) p).numProblem);
 	}
 
 }

@@ -17,7 +17,7 @@ public class UserDBResource {
 	
 	public UserDBResource() {
 		try {
-			dao.createUtilisateurTable();
+			dao.createUserDataTable();
 		} catch (Exception e) {
 			System.out.println("Table Utilisateur déjà là !");
 		}
@@ -25,8 +25,8 @@ public class UserDBResource {
 	}
 	
 	@POST
-	public UserData createUtilisateur(UserData user){
-		int id = dao.insertUserData(user.getPseudo(), user.getNom(), user.getPrenom(), user.getMdp(), user.getTypeUser());
+	public UserData createUser(UserData user){
+		int id = dao.insertUser(user.getPseudo(), user.getNom(), user.getPrenom(), user.getMdp(), user.getTypeUser());
 		user.setId(id);
 		return user;
 	}
