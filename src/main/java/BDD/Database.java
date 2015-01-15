@@ -57,14 +57,13 @@ public class Database {
 
 	      stmt = c.createStatement();
 	      String sql = "CREATE TABLE Historique " +
-	                   "(NumHisto    INT NOT NULL," +
+	                   "(NumHisto    INT PRIMARY KEY NOT NULL," +
 	                   " Score       INT NOT NULL," +
 	                   " TypeHisto   TEXT NOT NULL," +
 	                   " Pseudo      TEXT NOT NULL," +
 	                   " NumProbleme INT NOT NULL," +
 	                   " CONSTRAINT NumProbleme_fk FOREIGN KEY(NumProbleme) REFERENCES Probleme," +
-	                   " CONSTRAINT Pseudo_fk FOREIGN KEY(Pseudo) REFERENCES Utilisateur" +
-	                   " PRIMARY KEY (NumHisto, Score))";
+	                   " CONSTRAINT Pseudo_fk FOREIGN KEY(Pseudo) REFERENCES Utilisateur)";
 	      stmt.executeUpdate(sql);
 	      
 	      stmt = c.createStatement();
@@ -93,7 +92,8 @@ public class Database {
 	      
 	      stmt = c.createStatement();
 	      sql = "CREATE TABLE Utilisateur " +
-	                   "(Pseudo1 TEXT PRIMARY KEY     NOT NULL," +
+	                   "(NumUt    INT PRIMARY KEY" +
+	                   " Pseudo1              TEXT    NOT NULL," +
 	                   " Nom                  TEXT    NOT NULL," + 
 	                   " Prenom               INT     NOT NULL," +
 	                   " Mdp                  TEXT    NOT NULL," +
