@@ -20,9 +20,22 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import BDD.Level;
+
 @Path("/level")
 @Produces(MediaType.APPLICATION_JSON)
 public class LevelResource {
+	private static LevelDao dao = App.dbi.open(LevelDao.class);
+	
+	public LevelResource() {
+		try {
+			dao.createLevelTable();
+		} catch (Exception e) {
+			System.out.println("Table déjà là !");
+		}
+		dao.insert("Test level", 1, "Rejoindre le carré jaune en deplacant le rond rouge", "dsfds");
+	}
+	
 	@GET
 	public String getLevel() {
 		return "test";
@@ -30,8 +43,11 @@ public class LevelResource {
 	
 	@GET
 	@Path("/{levelid}")
-	public List<UserData> getLevel(@PathParam("levelid") int id ) {
-		
-		return new ArrayList<UserData>();
+	public Level getLevel(@PathParam("levelid") int id ) {
+		Level lvl = dao.findByDifficulty(id);
+		if (lvl == null) {
+			throw new WebApplicationException(404);
+		}
+		return lvl;
 	}
 }
