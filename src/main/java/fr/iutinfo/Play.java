@@ -44,7 +44,7 @@ public class Play {
 	}
 	
 	public boolean equals(Object j) {
-		return numProblem==(((Play) j).numProblem) && score==(((Play) j).score) && pseudo.equals(((Play) j).pseudo);
+		return id==(((Play) j).id);
 	}
 	
 	public String toString(){
@@ -54,4 +54,3 @@ public class Play {
 	
 
 }
-
