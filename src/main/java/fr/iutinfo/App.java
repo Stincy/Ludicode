@@ -17,6 +17,7 @@ public class App extends Application{
     	s.add(UserResource.class);
     	s.add(LevelResource.class);
     	s.add(InscriptionResource.class);
+    	s.add(UserDBResource.class);
     	return s;
     }
     
