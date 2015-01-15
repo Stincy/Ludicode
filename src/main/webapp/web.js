@@ -1,7 +1,27 @@
 function inscription() {
-	
-	alert($('#nom')+$('#prenom')+$('#pseudo')+$('#mdp'));
-	
+	$.ajax({
+		type : 'POST',
+		contentType : 'application/json',
+		url : "v1/inscription/",
+		dataType : "json",
+		data : JSON.stringify({
+			"nom" : $('#nom').val(),
+			"prenom" : $('#prenom').val(),
+			"pseudo" : $('#pseudo').val(),
+			"mdp" : $('#mdp').val(),
+			"id" : 0
+		}),
+		success : function(data, textStatus, jqXHR) {
+			alert($('#prenom').val());
+			$("#message").html("Inscription reussi !");
+			window.location.replace("index.html");
+			
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			$("#message").html("Inscription echou� !");
+			alert('postUser error: ' + textStatus + " " + errorThrown);
+		}
+	});
 }
 //
 //function connexion() {
