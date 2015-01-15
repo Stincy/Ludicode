@@ -16,6 +16,7 @@ public class App extends Application{
     	Set<Class<?>> s = new HashSet<Class<?>>();
     	s.add(UserResource.class);
     	s.add(LevelResource.class);
+    	s.add(InscriptionResource.class);
     	return s;
     }
     

@@ -32,7 +32,7 @@ public class Database {
 				SQLiteConfig config = new SQLiteConfig();
 				config.enforceForeignKeys(true);
 				db = DriverManager.getConnection("jdbc:sqlite:data/blender.db", config.toProperties());
-				if (freshlyCreated) initDb();
+				//if (freshlyCreated) initDb();
 			}
 		} catch (ClassNotFoundException e) {
 			throw new Exception("Le driver de base de donnees est introuvable");
