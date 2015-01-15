@@ -1,7 +1,6 @@
 package fr.iutinfo;
 
 public class UserData {
-	private int id = 0;
 	private String nom;
 	private String prenom;
 	private String pseudo;
@@ -9,8 +8,8 @@ public class UserData {
 	private String typeUser;/* eleve ou professeur */
 	
 
-	public UserData(int id,String nom,String prenom, String pseudo, String mdp,String typeUser) {
-		this.id=id;
+	public UserData(String nom,String prenom, String pseudo, String mdp,String typeUser) {
+		//this.id=id;
 		this.nom = nom;
 		this.prenom=prenom;
 		this.pseudo=pseudo;
@@ -21,14 +20,6 @@ public class UserData {
 
 	public UserData() {
 		
-	}
-
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id){
-		this.id=id;
 	}
 	
 	public String getNom() {
@@ -69,10 +60,6 @@ public class UserData {
 
 	public void setTypeUser(String typeUser) {
 		this.typeUser = typeUser;
-	}
-	
-	public boolean equals(Object u) {
-		return id==(((UserData) u).id);
 	}
 
 	public String toString() {

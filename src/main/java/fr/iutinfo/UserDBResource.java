@@ -26,8 +26,7 @@ public class UserDBResource {
 	
 	@POST
 	public UserData createUser(UserData user){
-		int id = dao.insertUser(user.getPseudo(), user.getNom(), user.getPrenom(), user.getMdp(), user.getTypeUser());
-		user.setId(id);
+		dao.insertUser(user.getPseudo(), user.getNom(), user.getPrenom(), user.getMdp(), user.getTypeUser());
 		return user;
 	}
 	

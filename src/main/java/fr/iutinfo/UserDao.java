@@ -30,14 +30,15 @@ public interface UserDao {
             " PRIMARY KEY (iduser, score));")
 	void createPlayTable();
 
-	@SqlUpdate("CREATE TABLE UserData " +
+
+	@SqlUpdate("CREATE TABLE UserData (id integer primary key autoincrement, pseudo TEXT, nom TEXT, prenom TEXT, mdp TEXT, typeUser TEXT)") /*+
 	                   "(iduser    INT AUTOINCREMENT," +
 	                   " pseudo               TEXT    NOT NULL," +
 	                   " nom                  TEXT    NOT NULL," + 
 	                   " prenom               TEXT     NOT NULL," +
 	                   " mdp                  TEXT    NOT NULL," +
 	                   " typeUser             TEXT,"+
-					   " CONSTRAINT userData_pk PRIMARY KEY(iduser));")
+					   " CONSTRAINT userData_pk PRIMARY KEY(iduser));")*/
 	void createUserDataTable();
 	
 	@SqlUpdate("CREATE TABLE Follow " +
@@ -60,13 +61,16 @@ public interface UserDao {
 	@GetGeneratedKeys
 	int insertPlay(@Bind("score") int score, @Bind("idhisto") int idhisto, @Bind("pseudo") String pseudo);
 	
-	@SqlUpdate("select * from UserData where pseudo = :pseudo and mdp = :mdp")
+	@SqlQuery("select * from UserData where pseudo = :pseudo and mdp = :mdp")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	UserData verifUser(@Bind("pseudo") String pseudo, @Bind("mdp") String mdp);
 	
 	@SqlQuery("select sum(score) from levels as l, UserData as u where l.iduser = u.iduser;")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	int ScoreTotal(@Bind("score") int score);
+	
+	@SqlUpdate("drop table if exists UserData")
+	void dropUserTable(); 
 	
 	void close();
 }

@@ -29,10 +29,6 @@ public class Follow {
 		this.followed = following;
 	}
 	
-	public boolean equals(UserData u1, UserData u2){
-		return u1.getId()==u2.getId();
-	}
-	
 	public String toString(){
 		return follower.getPseudo()+" suit "+followed.getPseudo();
 	}
