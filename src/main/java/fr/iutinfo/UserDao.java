@@ -10,26 +10,28 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 public interface UserDao {
 
 
-	/*@SqlUpdate("CREATE TABLE History (idhisto integer primary key autoincrement, idlvl integer foreign key references levels, pseudo TEXT foreign key references UserData, score integer)") /*
-	                   "(idhisto    INT PRIMARY KEY AUTOINCREMENT," +
-	                   " score      INT NOT NULL," +
-	                   " pseudo     TEXT NOT NULL," +
-	                   " idlvl      INT NOT NULL," +
-	                   " CONSTRAINT idlvl_fk FOREIGN KEY(idlvl) REFERENCES levels," +
-	                   " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData);")
-	void createHistoryTable();*/
-	
-	
-	@SqlUpdate("CREATE TABLE Play (idplay integer autoincrement, pseudo text, iduser integer foreign key references UserData, score integer foreign key references History, primary key (idhisto, score))") 
-            /*"(idplay INT AUTOINCREMENT," +
+
+	@SqlUpdate("CREATE TABLE Play " +
+            "(idplay INT AUTOINCREMENT," +
             " pseudo TEXT," +
             " idhisto INT,"+
             " score  INT," + 
             " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData," +
             " CONSTRAINT score_fk  FOREIGN KEY(score) REFERENCES History," +
-            " PRIMARY KEY (iduser, score));")*/
+            " PRIMARY KEY (iduser, score));")
 	void createPlayTable();
 
+
+
+	@SqlUpdate("CREATE TABLE History (idhisto integer primary key autoincrement, idlvl integer , pseudo TEXT , score integer, constraint fk_idlvl foreign key(idlvl) references levels, constraint fk_pseudo foreign key(pseudo) references UserData)") /*
+	                   "(idhisto    INT PRIMARY KEY AUTOINCREMENT," +
+	                   " score      INT NOT NULL," +
+	                   " pseudo     TEXT NOT NULL," +
+	                   " idlvl      INT NOT NULL," +
+	                   " CONSTRAINT idlvl_fk FOREIGN KEY(idlvl) REFERENCES levels," +
+	                   " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData);")*/
+	void createHistoryTable();
+	
 
 	@SqlUpdate("CREATE TABLE UserData (id integer primary key autoincrement, pseudo TEXT, nom TEXT, prenom TEXT, mdp TEXT, typeUser TEXT)") /*+
 	                   "(iduser    INT AUTOINCREMENT," +
@@ -53,20 +55,12 @@ public interface UserDao {
 	@GetGeneratedKeys
 	int insertUser(@Bind("pseudo") String pseudo, @Bind("nom") String nom, @Bind("prenom") String prenom, @Bind("mdp") String mdp, @Bind("typeUser") String typeUser);
 	
-	@SqlUpdate("insert into Play (score, idhisto, pseudo) values (:score, :idhisto, :pseudo)")
-	@GetGeneratedKeys
-	int insertPlay(@Bind("score") int score, @Bind("idhisto") int idhisto, @Bind("pseudo") String pseudo);
-	
 	@SqlQuery("select * from UserData where pseudo = :pseudo and mdp = :mdp")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	UserData verifUser(@Bind("pseudo") String pseudo, @Bind("mdp") String mdp);
 	
-	@SqlQuery("select pseudo, score from Play as p, UserData as u where p.iduser = u.iduser;")
-	@RegisterMapperFactory(BeanMapperFactory.class)
-	int ScoreTotal(@Bind("iduser") int iduser);
-	
 	@SqlUpdate("drop table if exists UserData")
 	void dropUserTable(); 
-		
+
 	void close();
 }

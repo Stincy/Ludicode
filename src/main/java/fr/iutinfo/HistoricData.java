@@ -1,46 +1,37 @@
 package fr.iutinfo;
 
 public class HistoricData {
-	private int numHistoric;
-	private int numProblem;
-	private String typePartie;
+	private int idhisto;
+	private int idlvl;
 	private int score;
 	private String pseudo;
 	
-	public HistoricData(int numHistoric, int numProblem, String typePartie, int score, String pseudo){
-		this.numHistoric=numHistoric;
-		this.numProblem=numProblem;
-		this.typePartie=typePartie;
+	public HistoricData(int idhisto, int idlvl, String pseudo, int score){
+		this.idhisto=idhisto;
+		this.idlvl=idlvl;
 		this.score=score;
 		this.pseudo=pseudo;
+		this.score=score;
 	}
 	
 	public HistoricData(){
 		
 	}
 	
-	public int getNumH() {
-		return numHistoric;
+	public int getIdhisto() {
+		return idhisto;
 	}
 	
-	public void setNumH(int numH) {
-		this.numHistoric = numH;
+	public void setIdhisto(int idhisto) {
+		this.idhisto = idhisto;
 	}
 	
-	public int getNumProbleme() {
-		return numProblem;
+	public int getIdlvl() {
+		return idlvl;
 	}
 	
-	public void setNumProbleme(int numProbleme) {
-		this.numProblem = numProbleme;
-	}
-
-	public String getTypePartie() {
-		return typePartie;
-	}
-	
-	public void setTypePartie(String typePartie) {
-		this.typePartie = typePartie;
+	public void setIdlvl(int idlvl) {
+		this.idlvl = idlvl;
 	}
 	
 	public int getScore() {
@@ -60,11 +51,11 @@ public class HistoricData {
 	}
 	
 	public boolean equals(Object h) {
-		return numHistoric==(((HistoricData) h).numHistoric);
+		return idhisto==(((HistoricData) h).idhisto);
 	}
 
 	public String toString() {
-		return numHistoric+ "-" +numProblem+ " du type "+typePartie+" le joueur "+pseudo+" a fait "+score+" points";
+		return idhisto+ "-" +idlvl+" le joueur "+ pseudo +" a fait "+score+" points";
 	}
 	
 }

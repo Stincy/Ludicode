@@ -31,9 +31,9 @@ public class UserDBResource {
 	}
 	
 	@GET
-	@Path("/{Pseudo}/{Mdp}")
-	public UserData verifUserData(@PathParam("Pseudo") String Pseudo, @PathParam("Mdp") String Mdp){
-		UserData user = dao.verifUser(Pseudo, Mdp);
+	@Path("/{pseudo}/{mdp}")
+	public UserData verifUserData(@PathParam("pseudo") String pseudo, @PathParam("mdp") String mdp){
+		UserData user = dao.verifUser(pseudo, mdp);
 		return user;
 //		if (user == null){
 //			return false;
