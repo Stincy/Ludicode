@@ -99,10 +99,23 @@ function Map(tileWidth, tileHeight, width, height) {
 }
 
 
+function getEnabledCommands() {
+	var str = "";
+	var inputElements = document.getElementsByClassName('command');
+	for(var i=0; inputElements[i]; ++i){
+		str += inputElements[i].checked ? "1" : "0";
+		if (i < inputElements.length-1) {
+			str += ",";
+		}
+	}
+	return str;
+}
+
+
 var map = new Map(5, 5, 200, 200);
 map.render();
 
 
 function save() {
-	alert(map.toString());
+	alert(map.toString()+"\n"+getEnabledCommands());
 }
