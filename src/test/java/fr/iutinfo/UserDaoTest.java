@@ -6,7 +6,7 @@ public class UserDaoTest {
 	UserDao dao = App.dbi.open(UserDao.class);
 	
 	@Test
-	public void testCreate() {
+	public void testUserData() {
 	
 		UserData prof = new UserData();
 	    prof.setPrenom("jojo");
@@ -26,7 +26,7 @@ public class UserDaoTest {
 	    u.setMdp("mdp");
 	    u.setTypeUser("eleve");
 	    
-	    int a= dao.insertUser(prof.getPseudo(), prof.getNom(), prof.getPrenom(), prof.getMdp(), prof.getTypeUser());
+	    //int a= dao.insertUser(prof.getPseudo(), prof.getNom(), prof.getPrenom(), prof.getMdp(), prof.getTypeUser());
 	    
 	    //dao.createUserDataTable();
 
@@ -41,4 +41,11 @@ public class UserDaoTest {
 		System.out.println("Terminé 2");
 	}
 
+	@Test
+	public void testScoreTotal(){
+	
+		Play p = new Play();
+		dao.createPlayTable();
+		
+	}
 }

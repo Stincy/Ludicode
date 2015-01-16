@@ -10,24 +10,24 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 public interface UserDao {
 
 
-	@SqlUpdate("CREATE TABLE History (idhisto integer primary key autoincrement, idlvl integer foreign key references levels, pseudo TEXT foreign key references UserData, score integer)") /*
+	/*@SqlUpdate("CREATE TABLE History (idhisto integer primary key autoincrement, idlvl integer foreign key references levels, pseudo TEXT foreign key references UserData, score integer)") /*
 	                   "(idhisto    INT PRIMARY KEY AUTOINCREMENT," +
 	                   " score      INT NOT NULL," +
 	                   " pseudo     TEXT NOT NULL," +
 	                   " idlvl      INT NOT NULL," +
 	                   " CONSTRAINT idlvl_fk FOREIGN KEY(idlvl) REFERENCES levels," +
-	                   " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData);")*/
-	void createHistoryTable();
+	                   " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData);")
+	void createHistoryTable();*/
 	
 	
-	@SqlUpdate("CREATE TABLE Play " +
-            "(idplay INT AUTOINCREMENT," +
+	@SqlUpdate("CREATE TABLE Play (idplay integer autoincrement, pseudo text, iduser integer foreign key references UserData, score integer foreign key references History, primary key (idhisto, score))") 
+            /*"(idplay INT AUTOINCREMENT," +
             " pseudo TEXT," +
             " idhisto INT,"+
             " score  INT," + 
             " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData," +
             " CONSTRAINT score_fk  FOREIGN KEY(score) REFERENCES History," +
-            " PRIMARY KEY (iduser, score));")
+            " PRIMARY KEY (iduser, score));")*/
 	void createPlayTable();
 
 
@@ -53,10 +53,6 @@ public interface UserDao {
 	@GetGeneratedKeys
 	int insertUser(@Bind("pseudo") String pseudo, @Bind("nom") String nom, @Bind("prenom") String prenom, @Bind("mdp") String mdp, @Bind("typeUser") String typeUser);
 	
-	@SqlUpdate("insert into History (idlvl, pseudo, score) values (:idlvl, :pseudo, :score)")
-	@GetGeneratedKeys
-	int insertHistory(@Bind("idlvl") int idlvl, @Bind("pseudo") String pseudo, @Bind("score") int score);
-	
 	@SqlUpdate("insert into Play (score, idhisto, pseudo) values (:score, :idhisto, :pseudo)")
 	@GetGeneratedKeys
 	int insertPlay(@Bind("score") int score, @Bind("idhisto") int idhisto, @Bind("pseudo") String pseudo);
@@ -65,23 +61,12 @@ public interface UserDao {
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	UserData verifUser(@Bind("pseudo") String pseudo, @Bind("mdp") String mdp);
 	
-	@SqlQuery("select * from History where  pseudo = :pseudo")
+	@SqlQuery("select pseudo, score from Play as p, UserData as u where p.iduser = u.iduser;")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	UserData verifHistoric(@Bind("pseudo") String pseudo);
-	
-	@SqlQuery("select sum(score) from levels as l, UserData as u where l.iduser = u.iduser;")
-	@RegisterMapperFactory(BeanMapperFactory.class)
-	int ScoreTotal(@Bind("score") int score);
-	
-	@SqlQuery("select sum(score) from Historic group by pseudo;")
-	@RegisterMapperFactory(BeanMapperFactory.class)
-	int ScoreTotalHisto(@Bind("pseudo") String pseudo);
+	int ScoreTotal(@Bind("iduser") int iduser);
 	
 	@SqlUpdate("drop table if exists UserData")
 	void dropUserTable(); 
-	
-	@SqlUpdate("drop table if exists History")
-	void dropHistoryTable();
-	
+		
 	void close();
 }
