@@ -7,6 +7,7 @@ public class Level {
 	private String information;
 	private String tiles;
 	private int nbCommands;
+	private String commands;
 	
 	
 	
@@ -39,6 +40,12 @@ public class Level {
 	}
 	public void setNbCommands(int nbCommands) {
 		this.nbCommands = nbCommands;
+	}
+	public String getCommands() {
+		return commands;
+	}
+	public void setCommands(String commands) {
+		this.commands = commands;
 	}
 
 }
