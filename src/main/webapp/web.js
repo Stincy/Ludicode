@@ -37,6 +37,11 @@ function inscription() {
 	}
 }
 
+function deconnexion() {
+	eraseCookie("pseudo");
+	window.location.href = "index.html";
+}
+
 function connexion() {
 	var pseudo = $('#pseudo').val();
 	var mdp = $('#mdp').val();
@@ -78,8 +83,12 @@ function readCookie(name) {
 
 function afficherSession() {
 	var html = 'Tu es ';
-	html = html + readCookie("pseudo");
-	$("#session").html(html);
+	if (readCookie("pseudo") == null) {
+		window.location.href = "index.html";
+	} else {
+		html = html + readCookie("pseudo");
+		$("#session").html(html);
+	}
 }
 
 function eraseCookie(name) {
