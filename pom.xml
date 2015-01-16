@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>fr.iutinfo.2t</groupId>
-	<artifactId>Ludicode</artifactId>
+	<artifactId>ludicode</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>Ludicode</name>
+	<name>ludicode</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
