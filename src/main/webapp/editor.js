@@ -112,10 +112,29 @@ function getEnabledCommands() {
 }
 
 
-var map = new Map(5, 5, 200, 200);
+var map = new Map(10, 10, 200, 200);
 map.render();
 
 
 function save() {
-	alert(map.toString()+"\n"+getEnabledCommands());
+	alert( map.toString() + "\n" + getEnabledCommands());
+	$.ajax({
+		type : 'POST',
+		contentType : 'application/json',
+		url : "v1/level",
+		dataType : "json",
+		data : JSON.stringify({
+			"difficulty" : -1,
+			"nbCommands" : 10,
+			"information" : "Test d'information",
+			"tiles" : map.toString(),
+			"commands" : getEnabledCommands()
+		}),
+		success : function(data, textStatus, jqXHR) {
+			//document.location.href = 'niveau.html?level='+data.difficulty;
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert('postUser error: ' + textStatus + " " + errorThrown);
+		}
+	});
 }

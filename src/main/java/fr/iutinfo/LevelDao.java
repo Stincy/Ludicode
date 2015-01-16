@@ -1,5 +1,7 @@
 package fr.iutinfo;
 
+import java.util.List;
+
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
@@ -21,9 +23,14 @@ public interface LevelDao {
 	@SqlQuery("select * from levels where difficulty = :difficulty")
     @RegisterMapperFactory(BeanMapperFactory.class)
 	Level findByDifficulty(@Bind("difficulty") int difficulty);
+	
+	@SqlQuery("select * from levels")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+	List<Level> findAll();
+	
 
 	@SqlUpdate("drop table if exists levels")
-	void dropUserTable(); 
+	void dropLevelTable(); 
 	
 	void close();
 }

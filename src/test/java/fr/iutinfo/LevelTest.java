@@ -1,19 +1,12 @@
 package fr.iutinfo;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Application;
-import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
@@ -30,8 +23,8 @@ public class LevelTest extends JerseyTest {
     }
 	
 	@Test
-	public void testLevel() {
-		 dao.dropUserTable();
+	public void testLevelDB() {
+		 dao.dropLevelTable();
 		 dao.createLevelTable();
 		 dao.insert(4242, 13, "info", "tiles", "commands");
 		 Level lvl = dao.findByDifficulty(4242);
@@ -43,8 +36,31 @@ public class LevelTest extends JerseyTest {
 	}
 	
 	@Test
-	public void testLevelCreation() {
+	public void testLevelDBMultiple() {
+		/*
+		 dao.dropLevelTable();
+		 dao.createLevelTable();
+		 createLevel(4242, 13, "info", "tiles", "commands");
+		 createLevel(4242, 13, "info", "tiles", "commands");
+		 List<Level> lvls = dao.findAll();
+		 assertEquals(2, lvls.size());*/
+	}
+	
+	@Test
+	public void testLevelGetter() {
 		String json = target("/level/1").request().get(String.class);
 		assertEquals("{\"commands\":\"0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0\",\"difficulty\":1,\"information\":\"Déplacer le rond rouge jusqu'au carré jaune\",\"nbCommands\":10,\"tiles\":\"0,0,0,0|2,3,0,0|0,0,0,0|0,0,0,0\"}", json);
+	}
+	
+	private Level createLevel(int difficulty, int nbCommands, String info, String tiles, String commands) {
+		Level level = new Level();
+		level.setDifficulty(difficulty);
+		level.setNbCommands(nbCommands);
+		level.setInformation(info);
+		level.setTiles(tiles);
+		level.setCommands(commands);
+	    Entity<Level> userEntity = Entity.entity(level, MediaType.APPLICATION_JSON);
+		Level savedLevel = target("/level").request().post(userEntity).readEntity(Level.class);
+		return savedLevel;
 	}
 }

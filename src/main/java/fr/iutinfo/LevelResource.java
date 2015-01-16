@@ -26,16 +26,39 @@ import BDD.Level;
 @Produces(MediaType.APPLICATION_JSON)
 public class LevelResource {
 	private static LevelDao dao = App.dbi.open(LevelDao.class);
+	private static int levelId = 0;
 	
 	public LevelResource() {
 		try {
-			dao.dropUserTable();
+			dao.dropLevelTable();
 			dao.createLevelTable();
 		} catch (Exception e) {}
 		dao.insert(1, 10, "Déplacer le rond rouge jusqu'au carré jaune", "0,0,0,0|2,3,0,0|0,0,0,0|0,0,0,0", "0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0");
 		dao.insert(2, 10, "Déplacer le rond rouge jusqu'au carré jaune", "0,0,0,0|2,0,0,3|0,0,0,0|0,0,0,0", "0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0");
 		dao.insert(3, 10, "Déplacer le rond rouge jusqu'au carré jaune", "0,0,0,0|0,2,0,0|0,0,3,0|0,0,0,0", "1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0");
-		dao.insert(4, 10, "Déplacer le rond rouge jusqu'au carré jaune et evité les murs en noir", "0,0,0,0|0,2,0,0|0,1,0,0|0,3,0,0", "1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0");
+		dao.insert(4, 10, "Déplacer le rond rouge jusqu'au carré jaune et eviter les murs en noir", "0,0,0,0|0,2,0,0|0,1,0,0|0,3,0,0", "1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0");
+		dao.insert(5, 10, "Déplacer le rond rouge jusqu'au carré jaune et eviter les murs en noir", "2,0,0,0,0|1,1,1,1,0|1,0,0,0,0|1,3,1,1,1|1,0,1,1,1", 
+				"1,1,1,1,0,0,0,0,0,0,0,0,0,0,0");
+
+		dao.insert(6, 3, "Déplacer le rond rouge jusqu'au carré jaune et eviter les murs en noir", "1,1,1,1,1|1,1,1,1,1|2,0,0,0,3|1,1,1,1,1|1,1,1,1,1", 
+				"1,1,1,1,0,0,1,0,0,0,0,0,0,0,0");
+		
+		
+		dao.insert(7, 3, "Déplacer le rond rouge jusqu'au carré jaune et eviter les murs en noir", "1,1,2,1,1|1,1,0,1,1|1,1,0,1,1|1,1,0,1,1|1,1,3,1,1", 
+				"1,1,1,1,0,0,0,0,0,1,0,0,0,0,0");
+		
+		
+		dao.insert(8, 4, "Déplacer le rond rouge jusqu'au carré jaune et eviter les murs en noir", "0,1,1,1,1,1,1,1|0,0,1,1,1,1,1,1|1,0,0,1,1,1,1,1|1,1,0,0,1,1,1,1|1,1,1,0,0,1,1,1|1,1,1,1,0,0,1,1|1,1,1,1,1,0,0,1|1,1,1,1,1,1,3,1", 
+				"0,1,1,0,0,0,0,0,0,1,1,1,1,1,1");
+		
+		
+		dao.insert(9, 4, "Déplacer le rond rouge jusqu'au carré jaune et eviter les murs en noir", "1,1,1,2,1|1,1,0,0,4|1,0,4,4,1|1,3,1,1,1|1,1,1,1,1", 
+				"1,1,1,1,1,1,1,1,1,1,1,1,1,1,1");
+		
+		dao.insert(10, 8, "Déplacer le rond rouge jusqu'au carré jaune et eviter les murs en noir", "1,1,1,1,1,1,1,1,4,1|1,1,1,1,1,1,1,1,4,2|1,1,1,1,1,1,4,1,0,1|1,1,1,1,1,1,4,4,4,1|1,1,1,1,1,1,4,1,1,1|1,1,4,1,1,1,0,1,1,1|1,1,4,4,4,4,4,1,1,1|4,1,0,1,1,1,1,1,1,1|0,4,4,1,1,1,1,1,1,1|3,1,1,1,1,1,1,1,1,1", 
+				"1,0,1,0,0,0,0,0,0,1,1,1,1,1,1");
+		
+		levelId = 4;
 	}
 	
 	@GET
@@ -46,5 +69,14 @@ public class LevelResource {
 			throw new WebApplicationException(404);
 		}
 		return lvl;
+	}
+	
+	
+	@POST
+	public Level createLevel(Level level){
+		int id = level.getDifficulty() == -1 ? ++levelId : level.getDifficulty();
+		dao.insert(id, level.getNbCommands(), level.getInformation(), level.getTiles(), level.getCommands());
+		level.setDifficulty(id);
+		return level;
 	}
 }
