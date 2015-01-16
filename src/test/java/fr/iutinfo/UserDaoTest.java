@@ -1,5 +1,7 @@
 package fr.iutinfo;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 public class UserDaoTest {
@@ -25,8 +27,7 @@ public class UserDaoTest {
 	    u.setPseudo("tito");
 	    u.setMdp("mdp");
 	    u.setTypeUser("eleve");
-	    
-	    //int a= dao.insertUser(prof.getPseudo(), prof.getNom(), prof.getPrenom(), prof.getMdp(), prof.getTypeUser());
+	    dao.insertUser(u.getPseudo(), u.getNom(), u.getPrenom(), u.getMdp(), u.getTypeUser());
 	    
 	    //dao.createUserDataTable();
 
@@ -37,6 +38,17 @@ public class UserDaoTest {
 	public void testVerif(){
 		dao.dropUserTable();
 	    dao.createUserDataTable();
+	    
+		UserData prof = new UserData();
+	    prof.setPrenom("jojo");
+	    prof.setNom("jiji");
+	    prof.setPseudo("jijo");
+	    prof.setMdp("mdpprof");
+	    prof.setTypeUser("professeur");
+	    dao.dropUserTable();
+	    dao.createUserDataTable();
+	    dao.insertUser(prof.getPseudo(), prof.getNom(), prof.getPrenom(), prof.getMdp(), prof.getTypeUser());
+		
 		dao.verifUser("jijo", "mdpprof");
 		System.out.println("Terminé 2");
 	}
