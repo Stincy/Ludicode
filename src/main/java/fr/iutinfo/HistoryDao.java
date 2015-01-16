@@ -9,7 +9,7 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
 public interface HistoryDao {
 
-	@SqlUpdate("CREATE TABLE History (idhisto integer primary key autoincrement, idlvl integer foreign key references levels, pseudo TEXT foreign key references UserData, score integer)")
+	@SqlUpdate("CREATE TABLE History (idhisto integer primary key autoincrement, idlvl integer , pseudo TEXT , score integer, constraint fk_idlvl foreign key(idlvl) references levels, constraint fk_pseudo foreign key(pseudo) references UserData)")
 	void createHistoryTable();
 	
 	@SqlUpdate("insert into History (idlvl, pseudo, score) values (:idlvl, :pseudo, :score)")
@@ -20,9 +20,9 @@ public interface HistoryDao {
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	HistoricData verifHistoric(@Bind("pseudo") String pseudo);
 	
-	@SqlQuery("select sum(score) from Historic where iduser = :iduser;")
+	@SqlQuery("select sum(score) as value from History where pseudo = :pseudo;")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	int ScoreTotalHisto(@Bind("iduser") int iduser);
+	Score ScoreTotalHisto(@Bind("pseudo") String pseudo);
 	
 	@SqlUpdate("drop table if exists History")
 	void dropHistoryTable();
