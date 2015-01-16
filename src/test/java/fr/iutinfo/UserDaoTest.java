@@ -41,11 +41,4 @@ public class UserDaoTest {
 		System.out.println("Terminé 2");
 	}
 
-	@Test
-	public void testScoreTotal(){
-	
-		Play p = new Play();
-		dao.createPlayTable();
-		
-	}
 }
