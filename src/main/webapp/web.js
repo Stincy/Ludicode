@@ -44,12 +44,14 @@ function connexion() {
 	createCookie("pseudo",pseudo,7);
 	 
 	 $.getJSON("v1/userdb/"+pseudo+"/"+mdp, function(data) {
-		 if (data == null) return;
-		 alert(data);
+		 if (data == null){
+			 $("#erreur").html("<div class='alert alert-danger' role='alert'>Mauvais Identifiant</div>");
+			 return;
+		 }
 		 createCookie("pseudo",pseudo,7);
 		 window.location.href = "Accueil.html";
 		}).error(function() {
-		    alert("error");
+			$("#erreur").html("<div class='alert alert-danger' role='alert'>Mauvais Identifiant</div>");
 		});
 }
 
@@ -75,7 +77,7 @@ function readCookie(name) {
 }
 
 function afficherSession() {
-	var html = 'Signed in as ';
+	var html = 'Tu es ';
 	html = html + readCookie("pseudo");
 	$("#session").html(html);
 }
