@@ -19,17 +19,6 @@ public interface UserDao {
 	                   " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData);")*/
 	void createHistoryTable();
 	
-	
-	@SqlUpdate("CREATE TABLE Play " +
-            "(idplay INT AUTOINCREMENT," +
-            " pseudo TEXT," +
-            " idhisto INT,"+
-            " score  INT," + 
-            " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData," +
-            " CONSTRAINT score_fk  FOREIGN KEY(score) REFERENCES History," +
-            " PRIMARY KEY (iduser, score));")
-	void createPlayTable();
-
 
 	@SqlUpdate("CREATE TABLE UserData (id integer primary key autoincrement, pseudo TEXT, nom TEXT, prenom TEXT, mdp TEXT, typeUser TEXT)") /*+
 	                   "(iduser    INT AUTOINCREMENT," +
@@ -53,18 +42,9 @@ public interface UserDao {
 	@GetGeneratedKeys
 	int insertUser(@Bind("pseudo") String pseudo, @Bind("nom") String nom, @Bind("prenom") String prenom, @Bind("mdp") String mdp, @Bind("typeUser") String typeUser);
 	
-	@SqlUpdate("insert into Play (score, idhisto, pseudo) values (:score, :idhisto, :pseudo)")
-	@GetGeneratedKeys
-	int insertPlay(@Bind("score") int score, @Bind("idhisto") int idhisto, @Bind("pseudo") String pseudo);
-	
 	@SqlQuery("select * from UserData where pseudo = :pseudo and mdp = :mdp")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	UserData verifUser(@Bind("pseudo") String pseudo, @Bind("mdp") String mdp);
-	
-	@SqlQuery("select sum(score) from levels as l, UserData as u where l.iduser = u.iduser;")
-	@RegisterMapperFactory(BeanMapperFactory.class)
-	int ScoreTotal(@Bind("score") int iduser);
-	
 	
 	@SqlUpdate("drop table if exists UserData")
 	void dropUserTable(); 
