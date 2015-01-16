@@ -32,7 +32,15 @@ public class HistoryResource {
 	@GET
 	@Path("/{pseudo}")
 	public HistoricData verifHistoric(@PathParam("pseudo") String pseudo){
-		return new HistoricData();
+		HistoricData histo = dao.verifHistoric(pseudo);
+		return histo;
+	}
+	
+	@GET
+	@Path("{pseudo}")
+	public Score getScoreTotal(@PathParam("pseudo") String pseudo){
+		Score score = dao.ScoreTotalHisto(pseudo);
+		return score;
 	}
 	
 }

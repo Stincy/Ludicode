@@ -9,16 +9,6 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
 public interface UserDao {
 
-
-	@SqlUpdate("CREATE TABLE History (idhisto integer primary key autoincrement, idlvl integer , pseudo TEXT , score integer, constraint fk_idlvl foreign key(idlvl) references levels, constraint fk_pseudo foreign key(pseudo) references UserData)") /*
-	                   "(idhisto    INT PRIMARY KEY AUTOINCREMENT," +
-	                   " score      INT NOT NULL," +
-	                   " pseudo     TEXT NOT NULL," +
-	                   " idlvl      INT NOT NULL," +
-	                   " CONSTRAINT idlvl_fk FOREIGN KEY(idlvl) REFERENCES levels," +
-	                   " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData);")*/
-	void createHistoryTable();
-	
 	
 	@SqlUpdate("CREATE TABLE Play " +
             "(idplay INT AUTOINCREMENT," +
