@@ -10,13 +10,13 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 public interface UserDao {
 
 
-	@SqlUpdate("CREATE TABLE History " +
+	@SqlUpdate("CREATE TABLE History (idhisto integer primary key autoincrement, idlvl integer foreign key references levels, pseudo TEXT foreign key references UserData, score integer)") /*
 	                   "(idhisto    INT PRIMARY KEY AUTOINCREMENT," +
 	                   " score      INT NOT NULL," +
 	                   " pseudo     TEXT NOT NULL," +
 	                   " idlvl      INT NOT NULL," +
 	                   " CONSTRAINT idlvl_fk FOREIGN KEY(idlvl) REFERENCES levels," +
-	                   " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData);")
+	                   " CONSTRAINT iduser_fk FOREIGN KEY(iduser) REFERENCES UserData);")*/
 	void createHistoryTable();
 	
 	
@@ -53,9 +53,9 @@ public interface UserDao {
 	@GetGeneratedKeys
 	int insertUser(@Bind("pseudo") String pseudo, @Bind("nom") String nom, @Bind("prenom") String prenom, @Bind("mdp") String mdp, @Bind("typeUser") String typeUser);
 	
-	@SqlUpdate("insert into History (idlvl, score, pseudo) values (:idlvl, :score, :pseudo)")
+	@SqlUpdate("insert into History (idlvl, pseudo, score) values (:idlvl, :pseudo, :score)")
 	@GetGeneratedKeys
-	int insertHistory(@Bind("idlvl") int idlvl, @Bind("score") int score, @Bind("pseudo") String pseudo);
+	int insertHistory(@Bind("idlvl") int idlvl, @Bind("pseudo") String pseudo, @Bind("score") int score);
 	
 	@SqlUpdate("insert into Play (score, idhisto, pseudo) values (:score, :idhisto, :pseudo)")
 	@GetGeneratedKeys
@@ -65,12 +65,23 @@ public interface UserDao {
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	UserData verifUser(@Bind("pseudo") String pseudo, @Bind("mdp") String mdp);
 	
+	@SqlQuery("select * from History where idlvl = :idlvl and pseudo = :pseudo and score = :score")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	UserData verifUser(@Bind("idlvl") int idlvl, @Bind("pseudo") String pseudo, @Bind("score") int score);
+	
 	@SqlQuery("select sum(score) from levels as l, UserData as u where l.iduser = u.iduser;")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	int ScoreTotal(@Bind("score") int score);
 	
+	@SqlQuery("select sum(score) from Historic group by pseudo;")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	int ScoreTotalHisto(@Bind("pseudo") String pseudo);
+	
 	@SqlUpdate("drop table if exists UserData")
 	void dropUserTable(); 
+	
+	@SqlUpdate("drop table if exists History")
+	void dropHistoryTable();
 	
 	void close();
 }
