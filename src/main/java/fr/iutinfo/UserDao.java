@@ -65,9 +65,9 @@ public interface UserDao {
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	UserData verifUser(@Bind("pseudo") String pseudo, @Bind("mdp") String mdp);
 	
-	@SqlQuery("select * from History where idlvl = :idlvl and pseudo = :pseudo and score = :score")
+	@SqlQuery("select * from History where  pseudo = :pseudo")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	UserData verifUser(@Bind("idlvl") int idlvl, @Bind("pseudo") String pseudo, @Bind("score") int score);
+	UserData verifHistoric(@Bind("pseudo") String pseudo);
 	
 	@SqlQuery("select sum(score) from levels as l, UserData as u where l.iduser = u.iduser;")
 	@RegisterMapperFactory(BeanMapperFactory.class)
