@@ -35,7 +35,7 @@ public class LevelResource {
 		dao.insert(1, 10, "Déplacer le rond rouge jusqu'au carré jaune", "0,0,0,0|2,3,0,0|0,0,0,0|0,0,0,0");
 		dao.insert(2, 10, "Déplacer le rond rouge jusqu'au carré jaune", "0,0,0,0|2,0,0,3|0,0,0,0|0,0,0,0");
 		dao.insert(3, 10, "Déplacer le rond rouge jusqu'au carré jaune", "0,0,0,0|0,2,0,0|0,0,3,0|0,0,0,0");
-		dao.insert(4, 10, "Déplacer le rond rouge jusqu'au carré jaune et evité les murs en vert", "0,0,0,0|0,2,0,0|0,1,0,0|0,3,0,0");
+		dao.insert(4, 10, "Déplacer le rond rouge jusqu'au carré jaune et evité les murs en noir", "0,0,0,0|0,2,0,0|0,1,0,0|0,3,0,0");
 	}
 	
 	@GET
