@@ -1,48 +1,73 @@
 
 <!DOCTYPE html>
 <html>
+<head>
+	<title>Editor</title>
+</head>
 <body>
+	<div class="container">
+		<a class="navbar-brand">Ludicode</a>
+		<p class="navbar-text">
+			Editeur de jeu
+		</p>
+	</div>
 
-<canvas id="map" width="200" height="200"
-style="border:1px solid #c3c3c3;">
+	<div class="container">
+	<div class="col-lg-4">
+	<h3>Plateau</h3>
+	<canvas id="map" width="200" height="200"
+		style="border: 1px solid #c3c3c3;">
 Votre navigateur ne supporte pas le HTML5 :(
 </canvas>
-		
-<div>
-<input type="radio" name="tile" value="0" checked> Vide<br>
-<input type="radio" name="tile" value="1"> Mur<br>
-<input type="radio" name="tile" value="2"> Joueur<br>
-<input type="radio" name="tile" value="3"> Destination<br>
-<input type="radio" name="tile" value="4"> Case Verte<br>
 </div>
 
-<div>
-<input type="checkbox" class="command" value="0" checked>Aller a gauche<br>
-<input type="checkbox" class="command" value="0" checked>Aller a droite<br>
-<input type="checkbox" class="command" value="0" checked>Aller en bas<br>
-<input type="checkbox" class="command" value="0" checked>Aller en haut<br>
-<input type="checkbox" class="command" value="0" checked>Répeter 2 fois<br>
-<input type="checkbox" class="command" value="0" checked>Répeter 3 fois<br>
-<input type="checkbox" class="command" value="0" checked>Répeter 4 fois<br>
-<input type="checkbox" class="command" value="0" checked>Répeter 5 fois<br>
-<input type="checkbox" class="command" value="0" checked>Répeter 10 fois<br>
-<input type="checkbox" class="command" value="0" checked>Tant que pas sur jaune<br>
-<input type="checkbox" class="command" value="0" checked>Si sur vert<br>
-<input type="checkbox" class="command" value="0" checked>Si vert a gauche<br>
-<input type="checkbox" class="command" value="0" checked>Si vert a droite<br>
-<input type="checkbox" class="command" value="0" checked>Si vert en bas<br>
-<input type="checkbox" class="command" value="0" checked>Si vert en haut<br>
-</div>
+	<div class="col-lg-4">
+		<h3>Composants</h3>
+		<input type="radio" name="tile" value="0" checked> Vide<br>
+		<input type="radio" name="tile" value="1"> Mur<br> <input
+			type="radio" name="tile" value="2"> Joueur<br> <input
+			type="radio" name="tile" value="3"> Destination<br> <input
+			type="radio" name="tile" value="4"> Case Verte<br>
+			</div>
+	<div class="col-lg-3">
+		<h3>Commandes</h3>
+		<input type="checkbox" class="command" value="0" checked>Aller
+		a gauche<br> <input type="checkbox" class="command" value="0"
+			checked>Aller a droite<br> <input type="checkbox"
+			class="command" value="0" checked>Aller en bas<br> <input
+			type="checkbox" class="command" value="0" checked>Aller en
+		haut<br> <input type="checkbox" class="command" value="0" checked>Rï¿½peter
+		2 fois<br> <input type="checkbox" class="command" value="0"
+			checked>Rï¿½peter 3 fois<br> <input type="checkbox"
+			class="command" value="0" checked>Rï¿½peter 4 fois<br> <input
+			type="checkbox" class="command" value="0" checked>Rï¿½peter 5
+		fois<br> <input type="checkbox" class="command" value="0" checked>Rï¿½peter
+		10 fois<br> <input type="checkbox" class="command" value="0"
+			checked>Tant que pas sur jaune<br> <input
+			type="checkbox" class="command" value="0" checked>Si sur vert<br>
+		<input type="checkbox" class="command" value="0" checked>Si
+		vert a gauche<br> <input type="checkbox" class="command"
+			value="0" checked>Si vert a droite<br> <input
+			type="checkbox" class="command" value="0" checked>Si vert en
+		bas<br> <input type="checkbox" class="command" value="0" checked>Si
+		vert en haut<br>
+		</div>
+	<div class="col-lg-1">
+	<button class="btn btn-success" onclick="save()">Enregistrer</button>
+	</div>
+	</div>
 
-<button onclick="save()">Enregistrer</button>
 
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		
-		<!-- bootstrap -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-		<script src="editor.js"></script>
+	<!-- bootstrap -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="editor.js"></script>
 </body>
 </html>
